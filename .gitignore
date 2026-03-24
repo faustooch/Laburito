@@ -1,0 +1,30 @@
+# =========================
+# FRONTEND (React / Node)
+# =========================
+Frontend/node_modules/
+Frontend/dist/
+Frontend/.npm/
+npm-debug.log*
+
+# =========================
+# BACKEND (Python / FastAPI)
+# =========================
+Backend/__pycache__/
+Backend/.venv/
+Backend/venv/
+*.py[cod]
+*$py.class
+
+# =========================
+# SECRETOS Y VARIABLES DE ENTORNO (¡CRÍTICO!)
+# =========================
+Backend/.env
+Frontend/.env
+
+# =========================
+# SISTEMA OPERATIVO E IDEs
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
