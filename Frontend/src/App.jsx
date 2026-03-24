@@ -1,11 +1,23 @@
+// src/App.jsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
+
 function App() {
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-900">
-      <h1 className="text-5xl font-bold text-blue-400">
-        ¡Hola Tailwind v4! 🚀
-      </h1>
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        
+        {/* 2. Habilitamos la ruta de registro */}
+        <Route path="/register" element={<RegisterPage />} />
+        
+        {/* <Route path="/login" element={<LoginPage />} /> */}
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
