@@ -1,6 +1,6 @@
 # app/models/user.py
 import enum
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Enum as SQLEnum, Text
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Enum as SQLEnum, Text, Date
 from sqlalchemy.orm import relationship
 from app.db.base import Base
 
@@ -20,15 +20,22 @@ class User(Base):
     nickname = Column(String, nullable=False)
     password_hash = Column(String, nullable=True)
     google_id = Column(String, unique=True, index=True, nullable=True)
-    auth_provider = Column(String, default="local")
+    auth_provider = Column(String, default="local")  # 'local' o 'google'
     is_active = Column(Boolean, default=True)
-
-    # Agregamos la columna de rol, por defecto todos nacen como clientes
     role = Column(SQLEnum(Role), default=Role.CLIENT, nullable=False)
 
+    # --- NUEVAS COLUMNAS DE DATOS BASE ---
+    city = Column(String, nullable=True)
+    address = Column(String, nullable=True)
+    date_of_birth = Column(Date, nullable=True)  # Usamos tipo Date real
+
+    # --- NUEVA COLUMNA DE FOTO ---
+    # Guardamos la URL, sea de Google o de nuestro servidor
+    profile_picture_url = Column(String, nullable=True)
+
     # Relaciones con los perfiles (Uno a Uno)
-    worker_profile = relationship("WorkerProfile", back_populates="user", uselist=False)
-    client_profile = relationship("ClientProfile", back_populates="user", uselist=False)
+    worker_profile = relationship("WorkerProfile", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    client_profile = relationship("ClientProfile", back_populates="user", uselist=False, cascade="all, delete-orphan")
 
 
 class WorkerProfile(Base):

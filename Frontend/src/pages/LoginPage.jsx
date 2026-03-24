@@ -1,28 +1,92 @@
 // src/pages/LoginPage.jsx
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { authService } from '../services/authService';
+import { useAuth } from '../context/AuthContext';
+import { useGoogleLogin } from '@react-oauth/google';
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
 
+  // Estados para manejo de errores y animaciones
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  
+
+  // Validación visual: ¿Están completos el email y la contraseña?
+  const isFormValid = formData.email && formData.password;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (error) setError(''); // Limpiamos el error si el usuario vuelve a escribir
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Intentando iniciar sesión con:', formData);
-    // Acá haremos el POST a /api/v1/auth/login para obtener el Token
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const response = await authService.login(formData.email, formData.password);
+      
+      // 2. CAMBIO CLAVE: Usamos el contexto en vez de localStorage directo
+      login(response.access_token); 
+
+      setIsLoading(false);
+      setIsSuccess(true);
+
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
+
+    } catch (err) {
+      setIsLoading(false);
+      const mensajeError = err.response?.data?.detail || 'Correo o contraseña incorrectos.';
+      setError(mensajeError);
+    }
   };
 
-  const handleGoogleLogin = () => {
-    console.log('Iniciando Google OAuth...');
-  };
+  const handleGoogleLogin = useGoogleLogin({
+    flow: 'auth-code',
+    onSuccess: async (codeResponse) => {
+      setIsLoading(true);
+      setError('');
+      try {
+        console.log("1. Código seguro recibido:", codeResponse.code);
+        
+        console.log("2. Enviando al backend...");
+        const backendResponse = await authService.googleLogin(codeResponse.code);
+        console.log("3. Respuesta del backend:", backendResponse);
+        
+        console.log("4. Ejecutando login del AuthContext...");
+        await login(backendResponse.access_token);
+        
+        console.log("5. Login exitoso. Redirigiendo...");
+        setIsLoading(false);
+        setIsSuccess(true);
+
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
+
+      } catch (err) {
+        console.error("ERROR DETALLADO EN EL FRONTEND:", err);
+        setIsLoading(false);
+        setError('Error al procesar el inicio de sesión con Google.');
+      }
+    },
+    onError: () => {
+      setError('La ventana de Google se cerró o falló la autenticación.');
+    }
+  });
 
   return (
     <div className="min-h-screen flex flex-col bg-neutral-950 text-neutral-100">
@@ -57,7 +121,6 @@ function LoginPage() {
                 <label className="block text-xs font-medium text-neutral-500">
                   Contraseña
                 </label>
-                {/* Un detallito extra: el link de "olvidé mi contraseña" (visual por ahora) */}
                 <a href="#" className="text-[10px] text-orange-500 hover:text-orange-400 transition font-medium">
                   ¿Olvidaste tu contraseña?
                 </a>
@@ -73,11 +136,30 @@ function LoginPage() {
               />
             </div>
 
+            {/* Mensaje de error dinámico */}
+            {error && (
+              <p className="text-red-400 text-xs font-medium text-center">{error}</p>
+            )}
+
+            {/* Botón interactivo igual al de registro */}
             <button 
               type="submit" 
-              className="mt-2 w-full bg-orange-600 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-orange-500 transition shadow-sm"
+              disabled={!isFormValid || isLoading || isSuccess}
+              className={`mt-2 w-full text-sm font-semibold py-2.5 rounded-lg transition-all duration-300 flex items-center justify-center gap-2
+                ${isSuccess 
+                  ? 'bg-green-600 text-white' 
+                  : !isFormValid 
+                    ? 'bg-neutral-800 text-neutral-500 cursor-not-allowed opacity-50' 
+                    : 'bg-orange-600 text-white hover:bg-orange-500 cursor-pointer shadow-sm active:scale-95'
+                }`}
             >
-              Ingresar
+              {isLoading ? (
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+              ) : isSuccess ? (
+                "✓ ¡Sesión Iniciada!"
+              ) : (
+                "Ingresar"
+              )}
             </button>
           </form>
 
@@ -93,7 +175,7 @@ function LoginPage() {
           <button 
             type="button" 
             onClick={handleGoogleLogin}
-            className="w-full flex items-center justify-center gap-2 bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-neutral-300 text-sm font-medium py-2.5 rounded-lg transition"
+            className="w-full flex items-center justify-center gap-2 bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-neutral-300 text-sm font-medium py-2.5 rounded-lg transition cursor-pointer"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -106,7 +188,7 @@ function LoginPage() {
 
           <p className="mt-6 text-center text-neutral-500 text-xs">
             ¿No tenés una cuenta?{' '}
-            <Link to="/register" className="text-orange-500 hover:text-orange-400 font-medium transition">
+            <Link to="/register" className="text-orange-500 hover:text-orange-400 font-medium transition cursor-pointer">
               Registrate
             </Link>
           </p>

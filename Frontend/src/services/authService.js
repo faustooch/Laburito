@@ -1,23 +1,30 @@
 // src/services/authService.js
-import api from './api';
+import api from './api'; // Asegurate de que tu import a la instancia de axios esté bien
 
 export const authService = {
-  // Función para registrar un nuevo usuario
+  // 1. Registro tradicional
   register: async (userData) => {
-    // userData debe ser: { nickname, email, password }
     const response = await api.post('/users/', userData);
     return response.data;
   },
 
-  // Función para iniciar sesión (OAuth2 requiere form-data)
+  // 2. Login tradicional
   login: async (email, password) => {
-    const formData = new FormData();
-    formData.append('username', email); // FastAPI usa 'username' para el campo de login
+    const formData = new URLSearchParams();
+    formData.append('username', email);
     formData.append('password', password);
 
     const response = await api.post('/auth/login', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     });
-    return response.data; // Aquí vendrá el access_token
-  }
+    return response.data;
+  },
+
+  // 3. Login con Google
+  googleLogin: async (code) => {
+    const response = await api.post('/auth/google', { token: code });
+    return response.data;
+  },
 };

@@ -1,13 +1,13 @@
 # app/core/config.py
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 class Settings(BaseSettings):
     PROJECT_NAME: str = "API de Usuarios"
     API_V1_STR: str = "/api/v1"
 
-    # Esta variable ahora es obligatoria y viene del .env
+    # Credenciales de Google (Ambas obligatorias y vienen del .env)
     GOOGLE_CLIENT_ID: str
+    GOOGLE_CLIENT_SECRET: str  # <--- ¡Agregamos esta línea!
 
     # Configuración de PostgreSQL
     POSTGRES_SERVER: str = "localhost"
@@ -30,6 +30,5 @@ class Settings(BaseSettings):
 
     # Configuración de Pydantic para leer el archivo .env
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
-
 
 settings = Settings()

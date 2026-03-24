@@ -4,9 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { authService } from '../services/authService';
+import { useGoogleLogin } from '@react-oauth/google';
+import { useAuth } from '../context/AuthContext';
 
 function RegisterPage() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({ 
     nickname: '', 
     email: '', 
@@ -53,9 +56,39 @@ function RegisterPage() {
     }
   };
 
-  const handleGoogleLogin = () => {
-    console.log('Iniciando Google OAuth...');
-  };
+  const handleGoogleLogin = useGoogleLogin({
+    flow: 'auth-code',
+    onSuccess: async (codeResponse) => {
+      setIsLoading(true);
+      setError('');
+      try {
+        console.log("1. Código seguro recibido:", codeResponse.code);
+        
+        console.log("2. Enviando al backend...");
+        const backendResponse = await authService.googleLogin(codeResponse.code);
+        console.log("3. Respuesta del backend:", backendResponse);
+        
+        console.log("4. Ejecutando login del AuthContext...");
+        await login(backendResponse.access_token);
+        
+        console.log("5. Login exitoso. Redirigiendo...");
+        setIsLoading(false);
+        setIsSuccess(true);
+
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
+
+      } catch (err) {
+        console.error("ERROR DETALLADO EN EL FRONTEND:", err);
+        setIsLoading(false);
+        setError('Error al procesar el inicio de sesión con Google.');
+      }
+    },
+    onError: () => {
+      setError('La ventana de Google se cerró o falló la autenticación.');
+    }
+  });
 
   return (
     <div className="min-h-screen flex flex-col bg-neutral-950 text-neutral-100">

@@ -1,7 +1,8 @@
 # app/schemas/user.py
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
-from app.models.user import Role  # Asegurate de tener este Enum en models/user.py
+from app.models.user import Role
+from datetime import date
 
 
 # --------- Requests (Lo que el cliente nos envía) ---------
@@ -13,10 +14,11 @@ class UserCreate(BaseModel):
 
 
 class UserUpdate(BaseModel):
-    # Mantenemos el tuyo intacto para no romper la ruta PUT
     nickname: Optional[str] = Field(None, min_length=3, max_length=50)
-    # Opcional: Si el día de mañana querés dejar que cambien su contraseña
-    # password: Optional[str] = Field(None, min_length=8, max_length=100)
+    # --- SUMAMOS ESTOS CAMPOS PARA EL PUT /users/{id} ---
+    city: Optional[str] = None
+    address: Optional[str] = None
+    date_of_birth: Optional[date] = None
 
 # Agregalo debajo de UserUpdate
 class WorkerProfileCreate(BaseModel):
@@ -42,6 +44,12 @@ class WorkerProfileResponse(BaseModel):
     class Config:
         from_attributes = True
 
+class WorkerProfileUpdate(BaseModel):
+    profession: Optional[str] = Field(None, min_length=3, max_length=50)
+    description: Optional[str] = Field(None, min_length=10, max_length=500)
+    contact_phone: Optional[str] = Field(None, min_length=8, max_length=20)
+    contact_email: Optional[EmailStr] = None
+
 
 class ClientProfileResponse(BaseModel):
     contact_phone: Optional[str]
@@ -57,11 +65,29 @@ class UserResponse(BaseModel):
     email: EmailStr
     nickname: str
     is_active: bool
-    role: Role  # Sumamos el rol
+    role: Role
+    auth_provider: str
+    city: Optional[str] = None
+    address: Optional[str] = None
+    date_of_birth: Optional[date] = None
+    profile_picture_url: Optional[str] = None
 
-    # Incluimos los perfiles (serán null si el usuario no tiene ese rol)
+    prueba_patata: str = "estoy_vivo"
+
     worker_profile: Optional[WorkerProfileResponse] = None
     client_profile: Optional[ClientProfileResponse] = None
+
+    class Config:
+        from_attributes = True
+
+# app/schemas/user.py
+class WorkerFeaturedResponse(BaseModel):
+    id: int
+    nickname: str
+    profile_picture_url: Optional[str] = None
+    city: Optional[str] = None
+    rating: float = 0.0 # <--- Imprescindible
+    worker_profile: Optional[WorkerProfileResponse] = None
 
     class Config:
         from_attributes = True

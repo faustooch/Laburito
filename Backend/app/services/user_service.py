@@ -46,3 +46,16 @@ def upgrade_to_worker(db: Session, user, profile_data: dict):
 
     # Si pasa la validación, mandamos la orden al repositorio
     return user_repository.upgrade_to_worker(db, user.id, profile_data)
+
+
+def update_worker_profile(db: Session, user_id: int, update_data: dict):
+    # Buscamos al usuario
+    user = user_repository.get_user_by_id(db, user_id)
+
+    # Actualizamos campo por campo su perfil de trabajador
+    for key, value in update_data.items():
+        setattr(user.worker_profile, key, value)
+
+    db.commit()
+    db.refresh(user)
+    return user

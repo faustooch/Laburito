@@ -1,4 +1,5 @@
 # app/api/v1/routes/auth.py
+import requests # <-- IMPORTANTE: Necesitamos requests para hacer el canje
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
@@ -11,6 +12,7 @@ from app.core.security import verify_password, create_access_token
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 from app.schemas.user import GoogleToken
+
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
@@ -19,63 +21,87 @@ def login(
         db: Session = Depends(get_db),
         form_data: OAuth2PasswordRequestForm = Depends()
 ):
-    # OAuth2 usa 'username' por defecto, nosotros le pediremos al usuario que ponga su email ahí
     user = user_repository.get_user_by_email(db, email=form_data.username)
 
-    # Verificamos que el usuario exista y que la contraseña coincida
-    # Primero verificamos si el usuario existe y si tiene una contraseña local guardada
     if not user or not user.password_hash:
         raise HTTPException(status_code=400, detail="Email o contraseña incorrectos")
 
-    # Si tiene contraseña local, ahí recién la comparamos
     if not verify_password(form_data.password, user.password_hash):
         raise HTTPException(status_code=400, detail="Email o contraseña incorrectos")
 
-    # Si todo está bien, generamos y devolvemos el token
     return {
         "access_token": create_access_token(user.id),
         "token_type": "bearer"
     }
 
 
+# app/api/v1/routes/auth.py
+# ... tus imports arriba (asegurate de tener `import requests`) ...
+
 @router.post("/google")
 def login_google(token_data: GoogleToken, db: Session = Depends(get_db)):
+    print("\n--- INICIANDO LOGIN GOOGLE ---")
+    print("1. [BACKEND] Petición recibida en /google")
     try:
-        # 1. Validamos el token con los servidores de Google
+        print("2. [BACKEND] Intercambiando código con Google...")
+        token_url = "https://oauth2.googleapis.com/token"
+        payload = {
+            "code": token_data.token,
+            "client_id": settings.GOOGLE_CLIENT_ID,
+            "client_secret": settings.GOOGLE_CLIENT_SECRET,
+            "redirect_uri": "postmessage",
+            "grant_type": "authorization_code",
+        }
+
+        # Le ponemos un timeout de 10 segundos para que no se cuelgue infinito
+        response = requests.post(token_url, data=payload, timeout=10)
+        print("3. [BACKEND] Respuesta de Google recibida. Status:", response.status_code)
+
+        token_info = response.json()
+        if "error" in token_info:
+            print("!!! Error de Google al canjear:", token_info)
+            raise ValueError("El código de autorización es inválido o ya fue usado.")
+
+        google_id_token = token_info.get("id_token")
+        print("4. [BACKEND] ID Token obtenido. Validando firma...")
+
         idinfo = id_token.verify_oauth2_token(
-            token_data.token,
+            google_id_token,
             google_requests.Request(),
             settings.GOOGLE_CLIENT_ID
         )
+        print("5. [BACKEND] Token validado. Email del usuario:", idinfo.get('email'))
 
-        # 2. Extraemos la info del usuario desde el token validado
         email = idinfo['email']
         name = idinfo.get('name', 'Usuario de Google')
-        google_id = idinfo['sub']  # 'sub' es el ID único del usuario en Google
+        google_id = idinfo['sub']
+        picture_url = idinfo.get('picture')
 
-        # 3. Buscamos si ya existe en nuestra base de datos
+        print("6. [BACKEND] Buscando usuario en la Base de Datos...")
         user = user_repository.get_user_by_email(db, email=email)
 
         if not user:
-            # Si no existe, lo creamos automáticamente
+            print("7. [BACKEND] Usuario no existe. Creando uno nuevo...")
             new_user_data = {
                 "email": email,
-                # Generamos un nickname temporal basado en su nombre
                 "nickname": name.replace(" ", "_").lower()[:50],
-                "password_hash": None,  # No tiene contraseña local
+                "password_hash": None,
                 "google_id": google_id,
-                "auth_provider": "google"
+                "auth_provider": "google",
+                "profile_picture_url": picture_url
             }
-            # OJO: Aquí no usamos el user_service.create_user porque ese espera una contraseña plana.
-            # Lo guardamos directo con el repositorio.
             user = user_repository.create_user(db, new_user_data)
+            print("8. [BACKEND] Usuario creado con éxito. ID:", user.id)
+        else:
+            print("7. [BACKEND] Usuario existente encontrado. ID:", user.id)
 
-        # 4. Generamos nuestro JWT local para el usuario
+        print("9. [BACKEND] Generando token local de FastAPI y devolviendo...")
         return {
             "access_token": create_access_token(user.id),
             "token_type": "bearer"
         }
 
-    except ValueError:
-        # Si el token es inventado, expiró, o no es de tu CLIENT_ID
-        raise HTTPException(status_code=401, detail="Token de Google inválido o expirado")
+    except Exception as e:
+        # Si explota CUALQUIER COSA, la atrapamos acá y la imprimimos
+        print("!!! [BACKEND] ERROR FATAL CATCH !!! ->", str(e))
+        raise HTTPException(status_code=401, detail=f"Error interno: {str(e)}")

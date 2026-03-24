@@ -2,10 +2,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.schemas.user import UserCreate, UserResponse, UserUpdate, WorkerProfileCreate
+from app.schemas.user import UserCreate, UserResponse, UserUpdate, WorkerProfileCreate, WorkerProfileUpdate, \
+    WorkerFeaturedResponse
 from app.services import user_service
 from app.api.deps import get_current_user, get_db
 from app.models.user import User
+from app.models.review import Review
+from sqlalchemy import func  # <--- Esta es la que falta
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -45,6 +48,30 @@ def become_worker(
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+
+@router.put("/me/worker-profile", response_model=UserResponse)
+def update_worker_profile(
+        profile_update: WorkerProfileUpdate,
+        current_user: User = Depends(get_current_user),
+        db: Session = Depends(get_db)
+):
+    """
+    Actualiza los datos del perfil de trabajador del usuario logueado.
+    """
+    # Verificamos que el usuario realmente sea un trabajador
+    if current_user.role != "worker" or not current_user.worker_profile:
+        raise HTTPException(status_code=400, detail="El usuario no es un trabajador activo.")
+
+    try:
+        # Pydantic nos da un diccionario solo con los campos que el usuario envió (exclude_unset)
+        update_data = profile_update.model_dump(exclude_unset=True)
+
+        # Llamamos al servicio para actualizar (esto lo tenés que tener en user_service)
+        updated_user = user_service.update_worker_profile(db, current_user.id, update_data)
+        return updated_user
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 # 2º RUTAS DINÁMICAS
 @router.get("/{user_id}", response_model=UserResponse)
 def get_user(user_id: int, db: Session = Depends(get_db)):
@@ -66,3 +93,36 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     if not result:
         raise HTTPException(status_code=404, detail="User not found")
     return {"ok": True}
+
+
+@router.get("/workers/featured", response_model=list[WorkerFeaturedResponse])
+def get_featured_workers(db: Session = Depends(get_db)):
+    """
+    Retorna los trabajadores ordenados por su promedio de rating.
+    """
+    # Explicación del Query:
+    # 1. Seleccionamos al Usuario y el promedio de sus ratings.
+    # 2. Usamos label("rating") para que coincida con el campo de nuestro esquema Pydantic.
+    # 3. Join con Review para calcular el promedio.
+    # 4. Filtramos solo los que tienen rol 'worker'.
+
+    results = db.query(
+        User,
+        func.coalesce(func.avg(Review.rating), 0).label("rating")
+    ).outerjoin(
+        Review, User.id == Review.worker_id
+    ).filter(
+        User.role == "worker",
+        User.worker_profile != None
+    ).group_by(User.id).order_by(
+        func.avg(Review.rating).desc().nulls_last()
+    ).limit(6).all()
+
+    # 'results' es una lista de tuplas: [(UserObject, 4.5), (UserObject, 4.2), ...]
+    # Necesitamos inyectar ese rating en el objeto User para que Pydantic lo vea
+    featured_workers = []
+    for user_obj, avg_rating in results:
+        user_obj.rating = float(avg_rating)  # Asignamos el promedio al objeto
+        featured_workers.append(user_obj)
+
+    return featured_workers
