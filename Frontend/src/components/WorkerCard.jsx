@@ -1,10 +1,22 @@
 // src/components/WorkerCard.jsx
+import { useNavigate } from 'react-router-dom';
+
 function WorkerCard({ worker }) {
+  const navigate = useNavigate();
+  
   // Calculamos las estrellas (asumiendo que worker.rating es un número de 0 a 5)
   const rating = worker.rating || 0;
+
+  // Función para navegar al perfil
+  const handleViewProfile = () => {
+    navigate(`/worker/${worker.id}`);
+  };
   
   return (
-    <div className="bg-neutral-900/40 border border-neutral-800 hover:border-orange-500/50 rounded-2xl p-5 transition-all duration-300 group shadow-sm hover:shadow-orange-500/10">
+    <div 
+      onClick={handleViewProfile} // Hacemos que toda la card sea clicable
+      className="bg-neutral-900/40 border border-neutral-800 hover:border-orange-500/50 rounded-2xl p-5 transition-all duration-300 group shadow-sm hover:shadow-orange-500/10 cursor-pointer"
+    >
       <div className="flex items-start gap-4">
         {/* Avatar */}
         <div className="relative">
@@ -47,9 +59,15 @@ function WorkerCard({ worker }) {
       </p>
 
       {/* Botón Acción */}
-      <button className="w-full mt-4 py-2 bg-neutral-800 hover:bg-orange-600 text-neutral-300 hover:text-white text-xs font-bold rounded-xl transition-all duration-200 cursor-pointer">
-    Ver Perfil Completo
-  </button>
+      <button 
+        onClick={(e) => {
+          e.stopPropagation(); // Evitamos que el clic se dispare dos veces si la card ya tiene onClick
+          handleViewProfile();
+        }}
+        className="w-full mt-4 py-2 bg-neutral-800 hover:bg-orange-600 text-neutral-300 hover:text-white text-xs font-bold rounded-xl transition-all duration-200 cursor-pointer"
+      >
+        Ver Perfil Completo
+      </button>
     </div>
   );
 }

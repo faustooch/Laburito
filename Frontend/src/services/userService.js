@@ -51,4 +51,24 @@ export const userService = {
     const response = await api.get('/users/workers/featured');
     return response.data;
   },
+
+  searchWorkers: async (params) => {
+  // Mapeamos 'minRating' de React a 'min_rating' de FastAPI si es necesario
+  const formattedParams = {
+    q: params.q || "",
+    city: params.city || "",
+    profession: params.profession || "",
+    min_rating: params.minRating || 0 // <-- Ojo con el nombre aquí
+  };
+  
+  const query = new URLSearchParams(formattedParams).toString();
+  const response = await api.get(`/users/workers/search?${query}`);
+  return response.data;
+},
+
+// src/services/userService.js
+getWorkerById: async (id) => {
+  const response = await api.get(`/users/workers/${id}`);
+  return response.data;
+},
 };

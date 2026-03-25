@@ -1,9 +1,11 @@
 // src/components/CategorySlider.jsx
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importamos para la navegación
 import { getCategoryImage } from '../utils/categoryImages'; 
 
 function CategorySlider({ professions }) {
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
 
   const scroll = (direction) => {
     const { current } = scrollRef;
@@ -12,6 +14,12 @@ function CategorySlider({ professions }) {
     } else {
       current.scrollBy({ left: 350, behavior: 'smooth' });
     }
+  };
+
+  // Función para manejar el clic en la categoría
+  const handleCategoryClick = (professionName) => {
+    // Redirigimos a la ruta de búsqueda con el query param de profesión
+    navigate(`/search?profession=${encodeURIComponent(professionName)}`);
   };
 
   return (
@@ -42,6 +50,7 @@ function CategorySlider({ professions }) {
         </div>
       </div>
 
+      {/* Contenedor del Scroll */}
       <div 
         ref={scrollRef}
         className="flex gap-5 overflow-x-auto pb-6 snap-x snap-mandatory select-none no-scrollbar px-1"
@@ -50,20 +59,24 @@ function CategorySlider({ professions }) {
         {professions.map((cat) => (
           <div 
             key={cat.id} 
-            // ELIMINADO: hover:-translate-y-1 para que no suba
+            onClick={() => handleCategoryClick(cat.name)} // Ejecuta la búsqueda al hacer clic
             className="group min-w-[200px] md:min-w-[260px] aspect-[4/5] snap-start relative flex flex-col items-start justify-end p-6 rounded-3xl border border-neutral-800 hover:border-orange-500/50 transition-all duration-500 cursor-pointer overflow-hidden shadow-2xl bg-neutral-950"
           >
             
+            {/* Imagen de Fondo con opacidad baja, zoom y blur sutil al hover */}
             <img 
               src={getCategoryImage(cat.name)} 
               alt={cat.name}
               className="absolute inset-0 w-full h-full object-cover opacity-60 transition-all duration-700 group-hover:scale-110 group-hover:blur-[1px]" 
             />
 
+            {/* Overlay Gradiente */}
             <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-transparent opacity-95 group-hover:opacity-100 group-hover:from-black transition-opacity duration-500"></div>
 
+            {/* Brillo naranja sutil al hover */}
             <div className="absolute inset-0 bg-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
+            {/* Texto y Acción */}
             <div className="z-10 w-full relative">
               <span className="block text-lg font-bold text-white tracking-tight group-hover:text-orange-500 transition-colors leading-tight">
                 {cat.name}

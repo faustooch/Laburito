@@ -4,9 +4,9 @@ from sqlalchemy.orm import Session
 
 from app.schemas.user import UserCreate, UserResponse, UserUpdate, WorkerProfileCreate, WorkerProfileUpdate, \
     WorkerFeaturedResponse
-from app.services import user_service
+from app.services import user_service, review_service
 from app.api.deps import get_current_user, get_db
-from app.models.user import User
+from app.models.user import User, WorkerProfile
 from app.models.review import Review
 from sqlalchemy import func  # <--- Esta es la que falta
 
@@ -126,3 +126,42 @@ def get_featured_workers(db: Session = Depends(get_db)):
         featured_workers.append(user_obj)
 
     return featured_workers
+
+
+@router.get("/workers/search", response_model=list[UserResponse])
+def search_workers(
+    q: str = None,
+    city: str = None,
+    profession: str = None,
+    min_rating: float = 0.0,  # <-- Forzamos float y valor por defecto
+    db: Session = Depends(get_db)
+):
+    # Pasamos el min_rating al servicio
+    return user_service.search_workers(
+        db,
+        q=q,
+        city=city,
+        profession=profession,
+        min_rating=min_rating
+    )
+
+
+@router.get("/workers/{worker_id}", response_model=UserResponse)
+def get_worker_profile(worker_id: int, db: Session = Depends(get_db)):
+    """
+    Endpoint para obtener el perfil detallado de un trabajador por su ID.
+    """
+    # 1. Buscamos el perfil base del trabajador
+    worker = user_service.get_worker_full_profile(db, worker_id)
+
+    if not worker:
+        raise HTTPException(
+            status_code=404,
+            detail="No se encontró el trabajador solicitado."
+        )
+
+    # 2. FORZAMOS la carga de reseñas usando el service de reviews
+    # que SI trae el reviewer_id y el reviewer_name que pide el esquema.
+    worker.reviews = review_service.get_worker_reviews(db, worker_id)
+
+    return worker

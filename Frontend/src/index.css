@@ -6,7 +6,7 @@
 
 .animate-scroll {
   /* Mantenemos la velocidad rápida (15s) */
-  animation: scroll 15s linear infinite;
+  animation: scroll 30s linear infinite;
   width: max-content;
   /* IMPORTANTE: Permitimos que el hover funcione dentro del scroll */
   display: flex; 

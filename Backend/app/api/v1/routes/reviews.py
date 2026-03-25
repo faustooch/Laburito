@@ -43,3 +43,25 @@ def get_worker_reviews(
         return review_service.get_worker_reviews(db=db, worker_id=worker_id)
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+
+@router.delete("/{review_id}")
+def delete_review(
+    review_id: int,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user)
+):
+    """
+    Elimina una reseña específica. Solo el autor de la misma puede hacerlo.
+    """
+    try:
+        review_service.delete_review(
+            db=db,
+            review_id=review_id,
+            current_user_id=current_user.id
+        )
+        return {"detail": "Reseña eliminada con éxito"}
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))

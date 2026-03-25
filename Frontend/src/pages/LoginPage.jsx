@@ -195,8 +195,6 @@ function LoginPage() {
 
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

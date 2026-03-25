@@ -1,87 +1,109 @@
 // src/components/Header.jsx
+import { useState } from 'react'; // Importamos useState
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Header() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState(''); // Estado para controlar el input
 
   const handleLogout = () => {
     logout();
     navigate('/');
   };
 
-  // Función helper para sacar la inicial del usuario de forma segura
   const getInitial = () => {
-    if (user && user.nickname) {
-      return user.nickname.charAt(0).toUpperCase();
+    return user?.nickname?.charAt(0).toUpperCase() || 'U';
+  };
+
+  // Función para procesar la búsqueda al darle Enter
+  const handleSearch = (e) => {
+    if (e.key === 'Enter' && searchTerm.trim() !== '') {
+      // Redirige a la página de búsqueda con el query param 'q'
+      navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+      setSearchTerm(''); // Limpia el input después de buscar
     }
-    return 'U'; // Por defecto si aún no cargó el nombre
   };
 
   return (
-    <header className="w-full border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+    <header className="w-full border-b border-neutral-900 bg-neutral-950/70 backdrop-blur-xl sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         
-        {/* 1. Logo (Izquierda) */}
-        <Link to="/" className="text-xl font-bold text-neutral-50 tracking-tight flex-shrink-0">
-          Laburito<span className="text-orange-500">.</span>
+        {/* 1. Logo */}
+        <Link to="/" className="group flex items-center gap-1">
+          <span className="text-xl font-bold text-neutral-50 tracking-tighter transition-colors group-hover:text-white">
+            Laburito<span className="text-orange-500 group-hover:animate-pulse">.</span>
+          </span>
         </Link>
 
-        {/* 2. Barra de Búsqueda (Centro) */}
+        {/* 2. Barra de Búsqueda Minimalista Funcional */}
         {user && (
-          <div className="hidden sm:flex flex-grow max-w-md bg-neutral-900/80 border border-orange-800 rounded-lg px-3 py-1.5 focus-within:border-orange-500/80 transition shadow-inner">
-            <svg className="w-4 h-4 text-orange-500 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <input 
-              type="text" 
-              placeholder="¿Qué servicio necesitás?" 
-              className="bg-transparent text-sm text-neutral-100 focus:outline-none placeholder:text-neutral-600 w-full"
-            />
+          <div className="hidden md:flex flex-grow justify-center px-8">
+            <div className="relative w-full max-w-sm group">
+              <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                <svg className="w-4 h-4 text-neutral-500 group-focus-within:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <input 
+                type="text" 
+                placeholder="Buscar profesionales o servicios..." 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={handleSearch} // Escucha la tecla Enter
+                className="w-full bg-neutral-900/40 border border-neutral-800 text-sm text-neutral-200 pl-10 pr-4 py-2 rounded-full focus:outline-none focus:border-orange-500/50 focus:bg-neutral-900/80 transition-all placeholder:text-neutral-600"
+              />
+            </div>
           </div>
         )}
 
-        {/* 3. Navegación Condicional (Derecha) */}
-        <div className="flex items-center gap-5 flex-shrink-0">
+        {/* 3. Acciones de Usuario */}
+        <nav className="flex items-center gap-3">
           {user ? (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-5">
               <button 
                 onClick={handleLogout}
-                className="cursor-pointer text-sm font-medium text-neutral-400 hover:text-red-400 transition"
+                className="hidden sm:block text-xs font-bold uppercase tracking-widest text-neutral-500 hover:text-red-500 transition-colors cursor-pointer"
               >
-                Cerrar Sesión
+                Salir
               </button>
 
-              {/* Avatar Dinámico */}
               <Link 
                 to="/profile"
-                className="w-8 h-8 rounded-full bg-orange-600/20 flex items-center justify-center text-sm font-bold text-orange-500 border border-orange-500/30 shadow-[0_0_10px_rgba(249,115,22,0.2)] hover:bg-orange-600/30 transition hover:scale-105 overflow-hidden"
-                title="Mi Perfil"
+                className="relative p-0.5 rounded-full border border-neutral-800 hover:border-orange-500/50 transition-all duration-300 bg-neutral-900 group"
               >
-                {user?.profile_picture_url ? (
-                  <img 
-                    src={user.profile_picture_url} 
-                    alt="Perfil" 
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer" /* <- CLAVE para que no se bloqueen las fotos de Google */
-                  />
-                ) : (
-                  getInitial()
-                )}
+                <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-orange-500/10">
+                  {user?.profile_picture_url ? (
+                    <img 
+                      src={user.profile_picture_url} 
+                      alt="Avatar" 
+                      className="w-full h-full object-cover transition-transform group-hover:scale-110" 
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <span className="text-xs font-bold text-orange-500">{getInitial()}</span>
+                  )}
+                </div>
               </Link>
             </div>
           ) : (
-            <>
-              <Link to="/login" className="text-sm font-medium text-neutral-300 hover:text-white transition">
-                Iniciar Sesión
+            <div className="flex items-center gap-3">
+              <Link 
+                to="/login" 
+                className="text-sm font-medium text-neutral-400 hover:text-white transition-colors px-3 py-2"
+              >
+                Ingresar
               </Link>
-              <Link to="/register" className="bg-orange-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-orange-500 transition shadow-sm">
-                Registrarse
+              <Link 
+                to="/register" 
+                className="bg-neutral-50 text-neutral-950 text-sm font-bold px-5 py-2 rounded-full hover:bg-orange-500 hover:text-white transition-all shadow-lg active:scale-95"
+              >
+                Registrate
               </Link>
-            </>
+            </div>
           )}
-        </div>
+        </nav>
 
       </div>
     </header>

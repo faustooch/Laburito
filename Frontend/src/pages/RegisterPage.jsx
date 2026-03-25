@@ -227,8 +227,6 @@ function RegisterPage() {
 
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
