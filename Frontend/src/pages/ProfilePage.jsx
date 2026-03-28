@@ -35,7 +35,7 @@ const CustomSelect = ({ options, value, onChange, disabled, placeholder }) => {
         className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all flex justify-between items-center select-none ${
           disabled 
             ? 'bg-neutral-900/30 border border-neutral-800 text-neutral-500 cursor-not-allowed opacity-60' 
-            : `bg-neutral-950 border text-neutral-100 cursor-pointer ${isOpen ? 'border-orange-500 ring-1 ring-orange-500/20' : 'border-neutral-800 hover:border-neutral-700'}`
+            : `bg-neutral-950 border text-neutral-100 cursor-pointer ${isOpen ? 'border-slate-500 ring-1 ring-slate-500/20' : 'border-neutral-800 hover:border-neutral-700'}`
         }`}
       >
         <span className={!selectedOption ? 'text-neutral-500' : 'font-medium'}>
@@ -53,7 +53,7 @@ const CustomSelect = ({ options, value, onChange, disabled, placeholder }) => {
               <div 
                 key={opt.value}
                 onClick={() => { onChange(opt.value); setIsOpen(false); }}
-                className={`px-4 py-2.5 text-sm cursor-pointer transition-colors ${value === opt.value ? 'bg-orange-500/10 text-orange-500 font-bold' : 'text-neutral-300 hover:bg-neutral-800 hover:text-white'}`}
+                className={`px-4 py-2.5 text-sm cursor-pointer transition-colors ${value === opt.value ? 'bg-slate-500/10 text-slate-500 font-bold' : 'text-neutral-300 hover:bg-neutral-800 hover:text-white'}`}
               >
                 {opt.label}
               </div>
@@ -188,7 +188,7 @@ function ProfilePage() {
 
   const roleDisplay = { client: 'Cliente', worker: 'Trabajador', admin: 'Admin' };
 
-  if (isLoading) return <div className="min-h-screen bg-neutral-950 flex flex-col"><Header /><main className="flex-grow flex items-center justify-center"><div className="w-12 h-12 border-4 border-orange-500/20 border-t-orange-500 rounded-full animate-spin"></div></main></div>;
+  if (isLoading) return <div className="min-h-screen bg-neutral-950 flex flex-col"><Header /><main className="flex-grow flex items-center justify-center"><div className="w-12 h-12 border-4 border-slate-500/20 border-t-slate-500 rounded-full animate-spin"></div></main></div>;
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col">
@@ -197,7 +197,7 @@ function ProfilePage() {
       <main className="flex-grow w-full max-w-6xl mx-auto px-6 py-12">
         <header className="mb-10">
           <h1 className="text-4xl font-black text-neutral-50 tracking-tighter">
-            Mi <span className="text-orange-500">Perfil</span>
+            Mi <span className="text-slate-500">Perfil</span>
           </h1>
           <p className="text-neutral-500 mt-2 font-medium">Gestioná tu información personal y profesional.</p>
         </header>
@@ -217,8 +217,8 @@ function ProfilePage() {
               
               {/* Contenedor de Foto con Blur y Borde Externo */}
               <div className="relative group mb-6 p-1">
-                <div className="absolute inset-0 bg-orange-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-700"></div>
-                <div className="absolute inset-0 border-2 border-neutral-800 rounded-full group-hover:border-orange-500/50 transition-all duration-500 z-10 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-slate-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                <div className="absolute inset-0 border-2 border-neutral-800 rounded-full group-hover:border-slate-500/50 transition-all duration-500 z-10 pointer-events-none"></div>
 
                 <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-transparent">
                   {profileData.profile_picture_url ? (
@@ -228,7 +228,7 @@ function ProfilePage() {
                       className="w-full h-full object-cover transition-all duration-500 group-hover:blur-[2px] group-hover:scale-110" 
                     />
                   ) : (
-                    <div className="w-full h-full bg-neutral-800 flex items-center justify-center text-5xl font-black text-orange-500 uppercase transition-all duration-500 group-hover:blur-[2px]">
+                    <div className="w-full h-full bg-neutral-800 flex items-center justify-center text-5xl font-black text-slate-500 uppercase transition-all duration-500 group-hover:blur-[2px]">
                       {profileData.nickname.charAt(0)}
                     </div>
                   )}
@@ -252,7 +252,7 @@ function ProfilePage() {
               <div className="flex items-center gap-2">
                 <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                   profileData.role === 'worker' 
-                    ? 'bg-orange-500/10 text-orange-500 border-orange-500/20 shadow-[0_0_15px_rgba(249,115,22,0.1)]' 
+                    ? 'bg-slate-500/10 text-slate-500 border-slate-500/20 shadow-[0_0_15px_rgba(249,115,22,0.1)]' 
                     : 'bg-neutral-800 text-neutral-400 border-neutral-700'
                 }`}>
                   {roleDisplay[profileData.role]}
@@ -268,7 +268,7 @@ function ProfilePage() {
             <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                    <div className="w-10 h-10 rounded-xl bg-slate-500/10 flex items-center justify-center text-slate-500">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                     </div>
                     <h3 className="text-xl font-bold text-neutral-100">Información Personal</h3>
@@ -284,7 +284,7 @@ function ProfilePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Nickname</label>
-                  <input type="text" name="nickname" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.nickname : profileData.nickname} onChange={handlePersonalChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-orange-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
+                  <input type="text" name="nickname" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.nickname : profileData.nickname} onChange={handlePersonalChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Email</label>
@@ -296,11 +296,11 @@ function ProfilePage() {
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Dirección</label>
-                  <input type="text" name="address" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.address : profileData.address || ''} onChange={handlePersonalChange} placeholder="Calle y altura" className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-orange-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
+                  <input type="text" name="address" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.address : profileData.address || ''} onChange={handlePersonalChange} placeholder="Calle y altura" className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
                 </div>
                 <div className="md:col-span-2 flex flex-col gap-1.5">
                   <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Fecha de Nacimiento</label>
-                  <input type="date" name="date_of_birth" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.date_of_birth : profileData.date_of_birth || ''} onChange={handlePersonalChange} className={`w-full md:w-1/2 rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none [color-scheme:dark] ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-orange-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
+                  <input type="date" name="date_of_birth" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.date_of_birth : profileData.date_of_birth || ''} onChange={handlePersonalChange} className={`w-full md:w-1/2 rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none [color-scheme:dark] ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
                 </div>
               </div>
 
@@ -310,7 +310,7 @@ function ProfilePage() {
                   <button 
                     onClick={savePersonalData} 
                     disabled={isSavingPersonal}
-                    className={`min-w-[160px] text-white text-sm font-bold px-8 py-2.5 rounded-xl transition-all duration-300 shadow-lg cursor-pointer flex items-center justify-center gap-2 ${showCheckPersonal ? 'bg-green-600' : 'bg-orange-600 hover:bg-orange-500 active:scale-95'}`}
+                    className={`min-w-[160px] text-white text-sm font-bold px-8 py-2.5 rounded-xl transition-all duration-300 shadow-lg cursor-pointer flex items-center justify-center gap-2 ${showCheckPersonal ? 'bg-green-600' : 'bg-slate-600 hover:bg-slate-500 active:scale-95'}`}
                   >
                     {isSavingPersonal ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : showCheckPersonal ? '¡Guardado!' : 'Guardar Cambios'}
                   </button>
@@ -323,7 +323,7 @@ function ProfilePage() {
               <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                      <div className="w-10 h-10 rounded-xl bg-slate-500/10 flex items-center justify-center text-slate-500">
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                       </div>
                       <h3 className="text-xl font-bold text-neutral-100">Perfil Laboral</h3>
@@ -343,15 +343,15 @@ function ProfilePage() {
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">WhatsApp / Tel</label>
-                    <input type="tel" name="contact_phone" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.contact_phone : profileData.worker_profile.contact_phone || ''} onChange={handleWorkerChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-orange-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
+                    <input type="tel" name="contact_phone" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.contact_phone : profileData.worker_profile.contact_phone || ''} onChange={handleWorkerChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
                   </div>
                   <div className="md:col-span-2 space-y-1.5">
                     <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Email de Contacto</label>
-                    <input type="email" name="contact_email" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.contact_email : profileData.worker_profile.contact_email || ''} onChange={handleWorkerChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-orange-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
+                    <input type="email" name="contact_email" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.contact_email : profileData.worker_profile.contact_email || ''} onChange={handleWorkerChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
                   </div>
                   <div className="md:col-span-2 space-y-1.5">
                     <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Descripción de servicios</label>
-                    <textarea name="description" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.description : profileData.worker_profile.description || ''} onChange={handleWorkerChange} rows="4" className={`w-full rounded-xl px-4 py-2.5 text-sm resize-none transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-orange-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`}></textarea>
+                    <textarea name="description" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.description : profileData.worker_profile.description || ''} onChange={handleWorkerChange} rows="4" className={`w-full rounded-xl px-4 py-2.5 text-sm resize-none transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`}></textarea>
                   </div>
                 </div>
 
@@ -361,7 +361,7 @@ function ProfilePage() {
                     <button 
                       onClick={saveWorkerData} 
                       disabled={isSavingWorker}
-                      className={`min-w-[160px] text-white text-sm font-bold px-8 py-2.5 rounded-xl transition-all duration-300 shadow-lg cursor-pointer flex items-center justify-center gap-2 ${showCheckWorker ? 'bg-green-600' : 'bg-orange-600 hover:bg-orange-500 active:scale-95'}`}
+                      className={`min-w-[160px] text-white text-sm font-bold px-8 py-2.5 rounded-xl transition-all duration-300 shadow-lg cursor-pointer flex items-center justify-center gap-2 ${showCheckWorker ? 'bg-green-600' : 'bg-slate-600 hover:bg-slate-500 active:scale-95'}`}
                     >
                       {isSavingWorker ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : showCheckWorker ? '¡Actualizado!' : 'Actualizar Perfil'}
                     </button>
@@ -371,13 +371,13 @@ function ProfilePage() {
             )}
 
             {profileData.role === 'client' && (
-              <div className="bg-gradient-to-r from-orange-500/10 to-transparent border border-orange-500/20 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm overflow-hidden relative group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-orange-500/10 transition-colors duration-700"></div>
+              <div className="bg-gradient-to-r from-slate-500/10 to-transparent border border-slate-500/20 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm overflow-hidden relative group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-slate-500/5 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-slate-500/10 transition-colors duration-700"></div>
                 <div className="relative z-10">
                   <h3 className="text-xl font-black text-neutral-50 mb-2">¿Querés trabajar en Laburito?</h3>
                   <p className="text-sm text-neutral-400 max-w-md">Convertite en Trabajador, publicá tus servicios y empezá a recibir consultas hoy mismo.</p>
                 </div>
-                <button onClick={() => navigate('/become-worker')} className="relative z-10 bg-orange-500 hover:bg-orange-600 text-white text-xs font-black uppercase tracking-widest px-8 py-3.5 rounded-xl transition-all shadow-xl active:scale-95 cursor-pointer">
+                <button onClick={() => navigate('/become-worker')} className="relative z-10 bg-slate-500 hover:bg-slate-600 text-white text-xs font-black uppercase tracking-widest px-8 py-3.5 rounded-xl transition-all shadow-xl active:scale-95 cursor-pointer">
                   Empezar ahora
                 </button>
               </div>

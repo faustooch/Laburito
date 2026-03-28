@@ -5,7 +5,7 @@ function CategoryCard({ category, onClick }) {
   return (
     <div 
       onClick={() => onClick(category.name)} 
-      className="group min-w-[200px] md:min-w-[260px] aspect-[4/5] relative flex flex-col items-start justify-end p-6 rounded-[2rem] border border-neutral-800 hover:border-orange-500/40 transition-all duration-500 cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-2 bg-neutral-950 flex-shrink-0"
+      className="group min-w-[200px] md:min-w-[260px] aspect-[4/5] relative flex flex-col items-start justify-end p-6 rounded-[2rem] border border-neutral-800 hover:border-slate-500/40 transition-all duration-500 cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-slate-500/10 hover:-translate-y-2 bg-neutral-950 flex-shrink-0"
     >
       {/* Capa 1: Imagen de fondo con zoom cinematográfico */}
       <img 
@@ -18,7 +18,7 @@ function CategoryCard({ category, onClick }) {
       <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-transparent opacity-90 group-hover:from-neutral-950 group-hover:via-neutral-900/90 transition-all duration-500 z-0"></div>
       
       {/* Capa 3: Resplandor naranja sutil en hover (Modo fusión) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none mix-blend-overlay"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none mix-blend-overlay"></div>
       
       {/* Capa 4: Contenido interactivo */}
       <div className="z-20 w-full relative transform transition-transform duration-500 group-hover:-translate-y-1">
@@ -27,11 +27,11 @@ function CategoryCard({ category, onClick }) {
         </span>
         
         <div className="flex items-center gap-2 mt-3 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-          <span className="text-[10px] font-bold text-orange-500 uppercase tracking-widest">
+          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
             Explorar
           </span>
           {/* Flecha cinética que se mueve a la derecha */}
-          <svg className="w-3.5 h-3.5 text-orange-500 transform transition-transform duration-500 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-3.5 h-3.5 text-slate-500 transform transition-transform duration-500 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
           </svg>
         </div>

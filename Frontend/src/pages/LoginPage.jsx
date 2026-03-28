@@ -92,7 +92,7 @@ function LoginPage() {
         >
           
           <h2 className="text-2xl font-semibold text-neutral-50 mb-6 text-center tracking-tight">
-            Iniciar <span className="text-orange-500">Sesión</span>
+            Iniciar <span className="text-slate-500">Sesión</span>
           </h2>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -108,7 +108,7 @@ function LoginPage() {
                 onChange={handleChange}
                 required 
                 placeholder="example@email.com"
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-orange-500/80 transition placeholder:text-neutral-700"
+                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-slate-500/80 transition placeholder:text-neutral-700"
               />
             </div>
 
@@ -117,7 +117,7 @@ function LoginPage() {
                 <label className="block text-xs font-medium text-neutral-500">
                   Contraseña
                 </label>
-                <a href="#" className="text-[10px] text-orange-500 hover:text-orange-400 transition font-medium">
+                <a href="#" className="text-[10px] text-slate-500 hover:text-slate-400 transition font-medium">
                   ¿Olvidaste tu contraseña?
                 </a>
               </div>
@@ -128,7 +128,7 @@ function LoginPage() {
                 onChange={handleChange}
                 required 
                 placeholder="••••••••"
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-orange-500/80 transition placeholder:text-neutral-700"
+                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-slate-500/80 transition placeholder:text-neutral-700"
               />
             </div>
 
@@ -144,7 +144,7 @@ function LoginPage() {
                   ? 'bg-green-600 text-white' 
                   : !isFormValid 
                     ? 'bg-neutral-800 text-neutral-500 cursor-not-allowed opacity-50' 
-                    : 'bg-orange-600 text-white hover:bg-orange-500 cursor-pointer shadow-sm active:scale-95'
+                    : 'bg-slate-600 text-white hover:bg-slate-500 cursor-pointer shadow-sm active:scale-95'
                 }`}
             >
               {isLoading ? (
@@ -182,7 +182,7 @@ function LoginPage() {
 
           <p className="mt-6 text-center text-neutral-500 text-xs">
             ¿No tenés una cuenta?{' '}
-            <Link to="/register" className="text-orange-500 hover:text-orange-400 font-medium transition cursor-pointer">
+            <Link to="/register" className="text-slate-500 hover:text-slate-400 font-medium transition cursor-pointer">
               Registrate
             </Link>
           </p>

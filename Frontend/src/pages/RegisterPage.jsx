@@ -99,7 +99,7 @@ function RegisterPage() {
         >
           
           <h2 className="text-2xl font-semibold text-neutral-50 mb-6 text-center tracking-tight">
-            Crear <span className="text-orange-500">Cuenta</span>
+            Crear <span className="text-slate-500">Cuenta</span>
           </h2>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
@@ -116,7 +116,7 @@ function RegisterPage() {
                 onChange={handleChange}
                 required 
                 placeholder="john_doe"
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-orange-500/80 transition placeholder:text-neutral-700"
+                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-slate-500/80 transition placeholder:text-neutral-700"
               />
             </div>
 
@@ -132,7 +132,7 @@ function RegisterPage() {
                 onChange={handleChange}
                 required 
                 placeholder="example@email.com"
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-orange-500/80 transition placeholder:text-neutral-700"
+                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-slate-500/80 transition placeholder:text-neutral-700"
               />
             </div>
 
@@ -148,7 +148,7 @@ function RegisterPage() {
                 onChange={handleChange}
                 required 
                 placeholder="••••••••"
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-orange-500/80 transition placeholder:text-neutral-700"
+                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-slate-500/80 transition placeholder:text-neutral-700"
               />
             </div>
 
@@ -165,7 +165,7 @@ function RegisterPage() {
                 required 
                 placeholder="••••••••"
                 className={`w-full bg-neutral-950 border rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none transition placeholder:text-neutral-700 ${
-                  error ? 'border-red-500/80' : 'border-neutral-800 focus:border-orange-500/80'
+                  error ? 'border-red-500/80' : 'border-neutral-800 focus:border-slate-500/80'
                 }`}
               />
             </div>
@@ -183,7 +183,7 @@ function RegisterPage() {
                   ? 'bg-green-600 text-white' 
                   : !isFormValid 
                     ? 'bg-neutral-800 text-neutral-500 cursor-not-allowed opacity-50' 
-                    : 'bg-orange-600 text-white hover:bg-orange-500 cursor-pointer shadow-sm active:scale-95'
+                    : 'bg-slate-600 text-white hover:bg-slate-500 cursor-pointer shadow-sm active:scale-95'
                 }`}
             >
               {isLoading ? (
@@ -221,7 +221,7 @@ function RegisterPage() {
 
           <p className="mt-6 text-center text-neutral-500 text-xs">
             ¿Ya tenés cuenta?{' '}
-            <Link to="/login" className="text-orange-500 hover:text-orange-400 font-medium transition cursor-pointer">
+            <Link to="/login" className="text-slate-500 hover:text-slate-400 font-medium transition cursor-pointer">
               Iniciá sesión
             </Link>
           </p>

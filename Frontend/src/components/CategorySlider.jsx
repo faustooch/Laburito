@@ -146,7 +146,7 @@ function CategorySlider({ professions }) {
       <div className="flex items-end justify-between mb-10 px-4">
         <div>
           <h3 className="text-3xl md:text-4xl font-black text-neutral-50 tracking-tight leading-none mb-2">
-            Explorar por <span className="text-orange-500">Rubro</span>
+            Explorar por <span className="text-slate-500">Rubro</span>
           </h3>
           <p className="text-neutral-500 text-sm md:text-base font-medium">
             Encontrá al trabajador ideal para tu necesidad
@@ -156,7 +156,7 @@ function CategorySlider({ professions }) {
         <div className="flex gap-3">
           <button 
             onClick={() => scroll('left')} 
-            className="w-12 h-12 flex items-center justify-center rounded-2xl border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-orange-500 hover:bg-neutral-800 hover:border-orange-500/50 transition-all cursor-pointer shadow-sm active:scale-95"
+            className="w-12 h-12 flex items-center justify-center rounded-2xl border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-slate-500 hover:bg-neutral-800 hover:border-slate-500/50 transition-all cursor-pointer shadow-sm active:scale-95"
             aria-label="Anterior categoría"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,7 +165,7 @@ function CategorySlider({ professions }) {
           </button>
           <button 
             onClick={() => scroll('right')} 
-            className="w-12 h-12 flex items-center justify-center rounded-2xl border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-orange-500 hover:bg-neutral-800 hover:border-orange-500/50 transition-all cursor-pointer shadow-sm active:scale-95"
+            className="w-12 h-12 flex items-center justify-center rounded-2xl border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-slate-500 hover:bg-neutral-800 hover:border-slate-500/50 transition-all cursor-pointer shadow-sm active:scale-95"
             aria-label="Siguiente categoría"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

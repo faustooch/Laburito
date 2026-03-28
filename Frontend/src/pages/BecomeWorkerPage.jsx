@@ -29,7 +29,7 @@ const CustomSelect = ({ options, value, onChange, disabled, placeholder }) => {
         className={`w-full rounded-xl px-4 py-3 text-sm transition-all flex justify-between items-center select-none ${
           disabled 
             ? 'bg-neutral-900/30 border border-neutral-800 text-neutral-500 cursor-not-allowed opacity-60' 
-            : `bg-neutral-950 border text-neutral-100 cursor-pointer ${isOpen ? 'border-orange-500 ring-1 ring-orange-500/20' : 'border-neutral-800 hover:border-neutral-700'}`
+            : `bg-neutral-950 border text-neutral-100 cursor-pointer ${isOpen ? 'border-slate-500 ring-1 ring-slate-500/20' : 'border-neutral-800 hover:border-neutral-700'}`
         }`}
       >
         <span className={!selectedOption ? 'text-neutral-500' : 'font-medium'}>
@@ -47,7 +47,7 @@ const CustomSelect = ({ options, value, onChange, disabled, placeholder }) => {
               <div 
                 key={opt.value}
                 onClick={() => { onChange(opt.value); setIsOpen(false); }}
-                className={`px-4 py-2.5 text-sm cursor-pointer transition-colors ${value === opt.value ? 'bg-orange-500/10 text-orange-500 font-bold' : 'text-neutral-300 hover:bg-neutral-800 hover:text-white'}`}
+                className={`px-4 py-2.5 text-sm cursor-pointer transition-colors ${value === opt.value ? 'bg-slate-500/10 text-slate-500 font-bold' : 'text-neutral-300 hover:bg-neutral-800 hover:text-white'}`}
               >
                 {opt.label}
               </div>
@@ -131,8 +131,8 @@ function BecomeWorkerPage() {
       <main className="flex-grow flex items-center justify-center p-6 py-20 relative">
         
         {/* Luces de fondo ambientales */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/5 blur-[120px] rounded-full pointer-events-none"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-slate-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-slate-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
         {/* Tarjeta Principal Animada */}
         <div 
@@ -142,13 +142,13 @@ function BecomeWorkerPage() {
         >
           
           <div className="text-center mb-10">
-            <div className="w-16 h-16 bg-orange-500/10 border border-orange-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-orange-500 shadow-inner">
+            <div className="w-16 h-16 bg-slate-500/10 border border-slate-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-slate-500 shadow-inner">
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
               </svg>
             </div>
             <h1 className="text-3xl md:text-4xl font-black text-neutral-50 mb-3 tracking-tight leading-tight">
-              Ofrecé tus <span className="text-orange-500">Servicios</span>
+              Ofrecé tus <span className="text-slate-500">Servicios</span>
             </h1>
             <p className="text-neutral-400 text-sm md:text-base font-medium max-w-md mx-auto">
               Completá estos datos para que los clientes puedan encontrarte y contactarte en nuestra red.
@@ -189,7 +189,7 @@ function BecomeWorkerPage() {
                     placeholder="+54 9 11 1234 5678" 
                     value={formData.contact_phone} 
                     onChange={handleChange} 
-                    className="w-full bg-neutral-950 border border-neutral-800 text-neutral-100 rounded-xl pl-11 pr-4 py-3 text-sm transition-all focus:outline-none focus:border-orange-500 shadow-inner" 
+                    className="w-full bg-neutral-950 border border-neutral-800 text-neutral-100 rounded-xl pl-11 pr-4 py-3 text-sm transition-all focus:outline-none focus:border-slate-500 shadow-inner" 
                   />
                 </div>
               </div>
@@ -207,7 +207,7 @@ function BecomeWorkerPage() {
                     placeholder="contacto@ejemplo.com" 
                     value={formData.contact_email} 
                     onChange={handleChange} 
-                    className="w-full bg-neutral-950 border border-neutral-800 text-neutral-100 rounded-xl pl-11 pr-4 py-3 text-sm transition-all focus:outline-none focus:border-orange-500 shadow-inner" 
+                    className="w-full bg-neutral-950 border border-neutral-800 text-neutral-100 rounded-xl pl-11 pr-4 py-3 text-sm transition-all focus:outline-none focus:border-slate-500 shadow-inner" 
                   />
                 </div>
               </div>
@@ -225,7 +225,7 @@ function BecomeWorkerPage() {
                 value={formData.description} 
                 onChange={handleChange} 
                 rows="5" 
-                className="w-full bg-neutral-950 border border-neutral-800 text-neutral-100 rounded-xl px-4 py-3 text-sm resize-none transition-all focus:outline-none focus:border-orange-500 shadow-inner"
+                className="w-full bg-neutral-950 border border-neutral-800 text-neutral-100 rounded-xl px-4 py-3 text-sm resize-none transition-all focus:outline-none focus:border-slate-500 shadow-inner"
               ></textarea>
             </div>
 
@@ -242,7 +242,7 @@ function BecomeWorkerPage() {
               <button 
                 type="submit" 
                 disabled={isSubmitting} 
-                className="bg-orange-600 hover:bg-orange-500 text-white text-sm font-bold px-8 py-3 rounded-xl transition-all duration-300 shadow-lg active:scale-95 w-full md:w-auto flex justify-center items-center cursor-pointer"
+                className="bg-slate-600 hover:bg-slate-500 text-white text-sm font-bold px-8 py-3 rounded-xl transition-all duration-300 shadow-lg active:scale-95 w-full md:w-auto flex justify-center items-center cursor-pointer"
               >
                 {isSubmitting ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>

@@ -15,7 +15,7 @@ function Footer() {
           {/* Marca y Propósito */}
           <div className="max-w-sm">
             <h2 className="text-xl font-black text-neutral-50 mb-3 tracking-tighter">
-              LABURITO<span className="text-orange-500">.</span>
+              LABURITO<span className="text-slate-500">.</span>
             </h2>
             <p className="text-sm text-neutral-500 leading-relaxed">
               Plataforma para conectar con trabajadores en Argentina.
@@ -26,7 +26,7 @@ function Footer() {
           <div className="flex gap-8">
             <button 
               onClick={() => navigate('/terms')} 
-              className="text-sm font-medium text-neutral-400 hover:text-orange-500 transition-colors cursor-pointer"
+              className="text-sm font-medium text-neutral-400 hover:text-slate-500 transition-colors cursor-pointer"
             >
               Términos y Condiciones
             </button>
@@ -43,7 +43,7 @@ function Footer() {
             </p>
             <span className="hidden md:inline text-neutral-800">•</span>
             <p className="text-[11px] text-neutral-500 font-medium uppercase tracking-widest">
-              Hecho con <span className="text-orange-500">♥</span> en Córdoba
+              Hecho con <span className="text-slate-500">♥</span> en Córdoba
             </p>
           </div>
           

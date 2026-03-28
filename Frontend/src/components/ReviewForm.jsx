@@ -75,7 +75,7 @@ function ReviewForm({ workerId, onReviewSuccess, onCancel }) {
           onChange={(e) => setComment(e.target.value)}
           disabled={isSaving || showCheck}
           placeholder="Contale a otros usuarios tu experiencia..."
-          className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 transition focus:outline-none focus:border-orange-500 min-h-[100px] resize-none disabled:opacity-50"
+          className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 transition focus:outline-none focus:border-slate-500 min-h-[100px] resize-none disabled:opacity-50"
           required
         />
       </div>
@@ -99,7 +99,7 @@ function ReviewForm({ workerId, onReviewSuccess, onCancel }) {
             type="submit"
             disabled={isSaving || showCheck}
             className={`min-w-[140px] text-white text-sm font-semibold px-6 py-2 rounded-lg transition shadow-sm cursor-pointer flex items-center justify-center gap-2 
-              ${showCheck ? 'bg-green-600' : 'bg-orange-600 hover:bg-orange-500'} 
+              ${showCheck ? 'bg-green-600' : 'bg-slate-600 hover:bg-slate-500'} 
               disabled:opacity-70`}
           >
             {isSaving ? (

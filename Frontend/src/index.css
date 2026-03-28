@@ -1,37 +1,42 @@
 @import "tailwindcss";
+
+/* Animación hacia la izquierda */
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); } 
 }
 
+/* Animación hacia la derecha */
+@keyframes scroll-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); } 
+}
+
 .animate-scroll {
-  /* Mantenemos la velocidad rápida (15s) */
-  animation: scroll 30s linear infinite;
+  animation: scroll 40s linear infinite;
   width: max-content;
-  /* IMPORTANTE: Permitimos que el hover funcione dentro del scroll */
   display: flex; 
   align-items: center;
 }
 
-/* --- NUEVO: Estilos base y efectos para las etiquetas --- */
+.animate-scroll-reverse {
+  animation: scroll-reverse 40s linear infinite;
+  width: max-content;
+  display: flex; 
+  align-items: center;
+}
+
 .label-pills-base {
-  /* Transición suave para todos los cambios (transform, shadow) */
   transition: all 0.3s ease-out;
-  /* Evitamos que el texto se mueva al agrandarse */
   will-change: transform; 
 }
 
-/* Efecto Hover: Agrandar + Brillar */
 .label-pills-base:hover {
-  /* Se agranda un 10% */
   transform: scale(1.1);
-  /* Brillo naranja sutil (sombra) */
-  box-shadow: 0 0 15px rgba(249, 115, 22, 0.4); 
-  /* Brillo extra al texto */
+  box-shadow: 0 0 15px rgba(100, 116, 139, 0.4); 
   color: #fff; 
 }
 
 html {
   scroll-behavior: smooth;
 }
-/* --------------------------------------------------------- */

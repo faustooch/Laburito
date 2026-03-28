@@ -26,14 +26,14 @@ function ReviewItem({ review, currentUser, onDeleteSuccess }) {
     <div className="relative overflow-hidden rounded-3xl border border-neutral-800/50 bg-neutral-900/40 p-6 transition-all duration-300 hover:border-neutral-700/50 hover:bg-neutral-900/60 shadow-sm group">
       
       {/* Luz de fondo sutil */}
-      <div className="absolute -right-10 -top-10 h-32 w-32 bg-orange-500/5 blur-3xl rounded-full pointer-events-none transition-colors group-hover:bg-orange-500/10" />
+      <div className="absolute -right-10 -top-10 h-32 w-32 bg-slate-500/5 blur-3xl rounded-full pointer-events-none transition-colors group-hover:bg-slate-500/10" />
 
       {/* OVERLAY DE CONFIRMACIÓN CUSTOM */}
       {showConfirm && (
         <div className="absolute inset-0 z-20 bg-neutral-950/80 backdrop-blur-md flex flex-col items-center justify-center p-6 transition-all animate-in fade-in duration-200">
           {isDeleting ? (
             <div className="flex flex-col items-center gap-3">
-              <div className="w-6 h-6 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin"></div>
+              <div className="w-6 h-6 border-2 border-slate-500/30 border-t-slate-500 rounded-full animate-spin"></div>
               <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Eliminando...</span>
             </div>
           ) : (
@@ -84,7 +84,7 @@ function ReviewItem({ review, currentUser, onDeleteSuccess }) {
             )}
 
             <div className="flex items-center gap-1.5 bg-neutral-950/80 px-3 py-1.5 rounded-xl border border-neutral-800/50 shadow-inner">
-              <svg className="w-3.5 h-3.5 text-orange-500 fill-current" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 text-slate-500 fill-current" viewBox="0 0 24 24">
                 <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
               </svg>
               <span className="text-xs font-black text-neutral-200">{review.rating}.0</span>

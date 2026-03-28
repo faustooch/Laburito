@@ -49,7 +49,7 @@ function WorkerProfilePage() {
     <div className="min-h-screen bg-neutral-950 flex flex-col">
       <Header />
       <main className="flex-grow flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-orange-500/20 border-t-orange-500 rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-slate-500/20 border-t-slate-500 rounded-full animate-spin"></div>
       </main>
     </div>
   );
@@ -77,12 +77,12 @@ function WorkerProfilePage() {
         <section className="bg-gradient-to-b md:bg-gradient-to-r from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 lg:p-12 mb-10 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center md:items-start gap-10">
           
           {/* Efecto de luz de fondo sutil */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 blur-3xl rounded-full pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-slate-500/5 blur-3xl rounded-full pointer-events-none"></div>
 
           {/* Avatar con la misma física que en ProfilePage */}
           <div className="relative group p-1 shrink-0">
-            <div className="absolute inset-0 bg-orange-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-700"></div>
-            <div className="absolute inset-0 border-2 border-neutral-800 rounded-full group-hover:border-orange-500/50 transition-all duration-500 z-10 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-slate-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-700"></div>
+            <div className="absolute inset-0 border-2 border-neutral-800 rounded-full group-hover:border-slate-500/50 transition-all duration-500 z-10 pointer-events-none"></div>
             <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-transparent">
               {worker.profile_picture_url ? (
                 <img 
@@ -91,7 +91,7 @@ function WorkerProfilePage() {
                   alt={worker.nickname} 
                 />
               ) : (
-                <div className="w-full h-full bg-neutral-800 flex items-center justify-center text-5xl md:text-6xl font-black text-orange-500 uppercase transition-all duration-500 group-hover:blur-[1px]">
+                <div className="w-full h-full bg-neutral-800 flex items-center justify-center text-5xl md:text-6xl font-black text-slate-500 uppercase transition-all duration-500 group-hover:blur-[1px]">
                   {worker.nickname.charAt(0)}
                 </div>
               )}
@@ -103,11 +103,11 @@ function WorkerProfilePage() {
             <h1 className="text-4xl md:text-5xl font-black text-neutral-50 mb-4 tracking-tight">{worker.nickname}</h1>
             
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-8">
-              <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border bg-orange-500/10 text-orange-500 border-orange-500/20 shadow-[0_0_15px_rgba(249,115,22,0.1)]">
+              <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border bg-slate-500/10 text-slate-500 border-slate-500/20 shadow-[0_0_15px_rgba(249,115,22,0.1)]">
                 {worker.worker_profile?.profession || 'Profesional'}
               </span>
               <div className="flex items-center gap-1.5 text-sm font-bold text-neutral-200 bg-neutral-900/80 px-3 py-1.5 rounded-full border border-neutral-800 shadow-inner">
-                <svg className="w-4 h-4 text-orange-500 fill-current" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-slate-500 fill-current" viewBox="0 0 24 24">
                   <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
                 </svg>
                 {worker.rating?.toFixed(1) || '0.0'}
@@ -131,7 +131,7 @@ function WorkerProfilePage() {
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                   <span className="text-[10px] font-bold uppercase tracking-wider">Email</span>
                 </div>
-                <a href={`mailto:${contactEmail}`} className="text-sm font-medium text-neutral-200 hover:text-orange-500 transition-colors truncate w-full md:text-left text-center">
+                <a href={`mailto:${contactEmail}`} className="text-sm font-medium text-neutral-200 hover:text-slate-500 transition-colors truncate w-full md:text-left text-center">
                   {contactEmail}
                 </a>
               </div>
@@ -165,7 +165,7 @@ function WorkerProfilePage() {
             {/* Sección: Descripción Profesional */}
             <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                <div className="w-10 h-10 rounded-xl bg-slate-500/10 flex items-center justify-center text-slate-500">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
                 <h2 className="text-xl font-bold text-neutral-100">Sobre el profesional</h2>
@@ -181,7 +181,7 @@ function WorkerProfilePage() {
             <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-neutral-800/50">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                  <div className="w-10 h-10 rounded-xl bg-slate-500/10 flex items-center justify-center text-slate-500">
                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.907a1 1 0 00.95-.69l1.519-4.674z"></path></svg>
                   </div>
                   <h2 className="text-xl font-bold text-neutral-100">Reseñas de clientes</h2>
@@ -192,7 +192,7 @@ function WorkerProfilePage() {
                     onClick={() => setShowReviewForm(true)}
                     className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded-xl text-xs font-bold text-neutral-200 transition-all cursor-pointer shadow-sm"
                   >
-                    <svg className="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
+                    <svg className="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
                     Escribir reseña
                   </button>
                 )}
@@ -219,10 +219,10 @@ function WorkerProfilePage() {
           {/* SIDEBAR: Seguridad (Sticky) */}
           <aside className="lg:col-span-4 lg:sticky lg:top-28 z-10">
             <div className="bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden group">
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-500/10 blur-3xl rounded-full pointer-events-none group-hover:bg-orange-500/20 transition-colors duration-500"></div>
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-slate-500/10 blur-3xl rounded-full pointer-events-none group-hover:bg-slate-500/20 transition-colors duration-500"></div>
               
               <div className="flex items-center gap-3 mb-5 relative z-10">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                <div className="w-10 h-10 rounded-xl bg-slate-500/10 flex items-center justify-center text-slate-500">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                   </svg>
@@ -234,8 +234,8 @@ function WorkerProfilePage() {
                 Para garantizar tu seguridad y la de tu dinero, te recomendamos <strong className="text-neutral-200">no realizar pagos por adelantado</strong>. 
               </p>
               
-              <div className="p-4 bg-orange-500/5 border border-orange-500/20 rounded-xl relative z-10">
-                <p className="text-xs text-orange-400/90 font-medium">
+              <div className="p-4 bg-slate-500/5 border border-slate-500/20 rounded-xl relative z-10">
+                <p className="text-xs text-slate-400/90 font-medium">
                   Acordá el presupuesto final únicamente después de haber verificado el trabajo o las condiciones presencialmente.
                 </p>
               </div>

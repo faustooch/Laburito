@@ -25,7 +25,7 @@ function TermsPage() {
         >
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-black text-neutral-50 tracking-tight mb-4">
-              Términos y <span className="text-orange-500">Condiciones</span>
+              Términos y <span className="text-slate-500">Condiciones</span>
             </h1>
             <p className="text-neutral-400">Última actualización: {new Date().toLocaleDateString('es-AR')}</p>
           </div>

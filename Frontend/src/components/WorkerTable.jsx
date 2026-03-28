@@ -24,7 +24,7 @@ function WorkerTable({ workers }) {
           {workers.map((worker) => (
             <tr 
               key={worker.id}
-              className="hover:bg-orange-500/5 transition-colors group"
+              className="hover:bg-slate-500/5 transition-colors group"
             >
               {/* Columna Perfil */}
               <td className="px-6 py-4">
@@ -33,13 +33,13 @@ function WorkerTable({ workers }) {
                     {worker.profile_picture_url ? (
                       <img src={worker.profile_picture_url} alt={worker.nickname} className="w-full h-full object-cover" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-orange-500/10 text-orange-500 font-bold">
+                      <div className="w-full h-full flex items-center justify-center bg-slate-500/10 text-slate-500 font-bold">
                         {worker.nickname.charAt(0).toUpperCase()}
                       </div>
                     )}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-neutral-100 group-hover:text-orange-500 transition-colors">
+                    <p className="text-sm font-semibold text-neutral-100 group-hover:text-slate-500 transition-colors">
                       {worker.nickname}
                     </p>
                     <p className="text-xs text-neutral-500">{worker.email}</p>
@@ -62,7 +62,7 @@ function WorkerTable({ workers }) {
               {/* Columna Rating */}
               <td className="px-6 py-4">
                 <div className="flex items-center justify-center gap-1.5">
-                  <svg className="w-4 h-4 text-orange-500 fill-current" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-slate-500 fill-current" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                   <span className="text-sm font-bold text-neutral-200">{worker.rating?.toFixed(1) || '0.0'}</span>
@@ -76,7 +76,7 @@ function WorkerTable({ workers }) {
                     e.stopPropagation(); // Evita que el click de la fila se dispare
                     handleRowClick(worker.id);
                   }}
-                  className="px-4 py-2 bg-neutral-800 group-hover:bg-orange-600 text-neutral-300 group-hover:text-white text-xs font-bold rounded-xl transition-all cursor-pointer shadow-sm active:scale-95"
+                  className="px-4 py-2 bg-neutral-800 group-hover:bg-slate-600 text-neutral-300 group-hover:text-white text-xs font-bold rounded-xl transition-all cursor-pointer shadow-sm active:scale-95"
                 >
                   Ver Perfil
                 </button>
