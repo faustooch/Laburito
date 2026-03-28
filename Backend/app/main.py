@@ -12,6 +12,7 @@ from app.api.v1.routes import users
 from app.api.v1.routes import auth
 from app.api.v1.routes import reviews
 from app.api.v1.routes import professions
+from app.api.v1.routes import stats
 
 # Crea las tablas en la base de datos si no existen
 Base.metadata.create_all(bind=engine)
@@ -37,8 +38,8 @@ app.add_middleware(
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(users.router, prefix="/api/v1")
 app.include_router(reviews.router, prefix="/api/v1")
-
 app.include_router(professions.router, prefix="/api/v1")
+app.include_router(stats.router, prefix="/api/v1")
 
 # Dejamos solo un endpoint raíz simple para verificar que la API funciona
 @app.get("/")

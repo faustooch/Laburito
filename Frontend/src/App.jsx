@@ -6,7 +6,8 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import BecomeWorkerPage from './pages/BecomeWorkerPage';
 import SearchPage from './pages/SearchPage';
-import WorkerProfilePage from './pages/WorkerProfilePage'; // Importamos la nueva página
+import WorkerProfilePage from './pages/WorkerProfilePage';
+import TermsPage from './pages/TermsPage';
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/become-worker" element={<BecomeWorkerPage />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/worker/:id" element={<WorkerProfilePage />} /> {/* Nueva ruta para el perfil del trabajador */}
+        <Route path="/worker/:id" element={<WorkerProfilePage />} />
+        <Route path="/terms" element={<TermsPage />} />
 
       </Routes>
     </BrowserRouter>

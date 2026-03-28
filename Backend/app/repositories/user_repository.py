@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models.user import User, ClientProfile, Role, WorkerProfile
+from sqlalchemy import func
 
 
 def create_user(db: Session, user_data: dict) -> User:

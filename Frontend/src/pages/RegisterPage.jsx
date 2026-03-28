@@ -1,5 +1,5 @@
 // src/pages/RegisterPage.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -20,6 +20,15 @@ function RegisterPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  // Estado para la animación de montaje
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // Dispara la transición 50ms después de renderizar
+    const timer = setTimeout(() => setIsMounted(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
 
   const isFormValid = formData.nickname && formData.email && formData.password && formData.confirmPassword;
 
@@ -45,9 +54,7 @@ function RegisterPage() {
       setIsLoading(false);
       setIsSuccess(true);
 
-      setTimeout(() => {
-        navigate('/login');
-      }, 2000);
+      setTimeout(() => navigate('/login'), 2000);
       
     } catch (err) {
       setIsLoading(false);
@@ -62,25 +69,15 @@ function RegisterPage() {
       setIsLoading(true);
       setError('');
       try {
-        console.log("1. Código seguro recibido:", codeResponse.code);
-        
-        console.log("2. Enviando al backend...");
         const backendResponse = await authService.googleLogin(codeResponse.code);
-        console.log("3. Respuesta del backend:", backendResponse);
-        
-        console.log("4. Ejecutando login del AuthContext...");
         await login(backendResponse.access_token);
         
-        console.log("5. Login exitoso. Redirigiendo...");
         setIsLoading(false);
         setIsSuccess(true);
 
-        setTimeout(() => {
-          navigate('/');
-        }, 1500);
+        setTimeout(() => navigate('/'), 1500);
 
       } catch (err) {
-        console.error("ERROR DETALLADO EN EL FRONTEND:", err);
         setIsLoading(false);
         setError('Error al procesar el inicio de sesión con Google.');
       }
@@ -91,11 +88,15 @@ function RegisterPage() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-neutral-950 text-neutral-100">
+    <div className="min-h-screen flex flex-col bg-neutral-950 text-neutral-100 overflow-x-hidden">
       <Header />
 
       <main className="flex-grow flex items-center justify-center px-4 py-8 w-full">
-        <div className="w-full max-w-sm bg-neutral-900/50 p-6 rounded-2xl border border-neutral-800 shadow-xl backdrop-blur-sm">
+        <div 
+          className={`w-full max-w-sm bg-neutral-900/50 p-6 rounded-2xl border border-neutral-800 shadow-xl backdrop-blur-sm transform transition-all duration-700 ease-out ${
+            isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           
           <h2 className="text-2xl font-semibold text-neutral-50 mb-6 text-center tracking-tight">
             Crear <span className="text-orange-500">Cuenta</span>
@@ -227,6 +228,7 @@ function RegisterPage() {
 
         </div>
       </main>
+      
     </div>
   );
 }

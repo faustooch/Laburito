@@ -23,10 +23,8 @@ function WorkerTable({ workers }) {
         <tbody className="divide-y divide-neutral-800/50">
           {workers.map((worker) => (
             <tr 
-              key={worker.id} 
-              // Hacemos que toda la fila sea clickeable
-              onClick={() => handleRowClick(worker.id)}
-              className="hover:bg-orange-500/5 transition-colors group cursor-pointer"
+              key={worker.id}
+              className="hover:bg-orange-500/5 transition-colors group"
             >
               {/* Columna Perfil */}
               <td className="px-6 py-4">

@@ -30,4 +30,8 @@
   /* Brillo extra al texto */
   color: #fff; 
 }
+
+html {
+  scroll-behavior: smooth;
+}
 /* --------------------------------------------------------- */
