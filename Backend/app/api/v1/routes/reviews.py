@@ -1,7 +1,7 @@
 # app/api/v1/routes/reviews.py
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
 from typing import List
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
 
 from app.schemas.review import ReviewCreate, ReviewResponse
 from app.services import review_service
@@ -15,7 +15,7 @@ def create_review(
     worker_id: int,
     review_in: ReviewCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user) # <- ¡Acá garantizamos la seguridad!
+    current_user: User = Depends(get_current_user)
 ):
     """
     Deja una reseña (1 a 5 estrellas) a un trabajador específico.
@@ -27,9 +27,8 @@ def create_review(
             worker_id=worker_id,
             review_in=review_in
         )
-    except Exception as e:
-        # Si el servicio tira un error (ej: autobombo), se lo mostramos al usuario
-        raise HTTPException(status_code=400, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 @router.get("/workers/{worker_id}", response_model=List[ReviewResponse])
 def get_worker_reviews(
@@ -37,19 +36,17 @@ def get_worker_reviews(
     db: Session = Depends(get_db)
 ):
     """
-    Obtiene todas las reseñas que recibió un trabajador. (Cualquiera puede verlas, no pide token)
+    Obtiene todas las reseñas que recibió un trabajador. (Público)
     """
-    try:
-        return review_service.get_worker_reviews(db=db, worker_id=worker_id)
-    except Exception as e:
-        raise HTTPException(status_code=404, detail=str(e))
+    # Como es un GET simple, no hace falta atrapar errores complejos acá.
+    return review_service.get_worker_reviews(db=db, worker_id=worker_id)
 
 
 @router.delete("/{review_id}")
 def delete_review(
     review_id: int,
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user: User = Depends(get_current_user)
 ):
     """
     Elimina una reseña específica. Solo el autor de la misma puede hacerlo.
@@ -61,7 +58,12 @@ def delete_review(
             current_user_id=current_user.id
         )
         return {"detail": "Reseña eliminada con éxito"}
-    except HTTPException as he:
-        raise he
+    except KeyError as e:
+        # KeyError indica que no se encontró en la DB (404)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e).strip("'"))
+    except PermissionError as e:
+        # PermissionError indica falta de permisos (403)
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        # Fallback para errores genéricos (400 o 500)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))

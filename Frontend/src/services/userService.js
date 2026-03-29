@@ -71,4 +71,15 @@ getWorkerById: async (id) => {
   const response = await api.get(`/users/workers/${id}`);
   return response.data;
 },
+
+downgradeToClient: async () => {
+    try {
+      // Utilizamos el método DELETE por convención REST para eliminar un recurso
+      const response = await api.delete('/users/me/worker-profile');
+      return response.data;
+    } catch (error) {
+      console.error("Error crítico al dar de baja el perfil de trabajador:", error);
+      throw error.response?.data || error.message;
+    }
+  },
 };

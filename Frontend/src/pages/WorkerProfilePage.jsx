@@ -14,6 +14,7 @@ function WorkerProfilePage() {
   
   const [worker, setWorker] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
 
@@ -25,10 +26,12 @@ function WorkerProfilePage() {
       console.error("Error al cargar el perfil:", err);
     } finally {
       setLoading(false);
+      setTimeout(() => setIsMounted(true), 50);
     }
   }, [id]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchWorker();
   }, [fetchWorker]);
 
@@ -71,19 +74,21 @@ function WorkerProfilePage() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col">
       <Header />
 
+      {/* Corrección 1: Eliminado el overflow-hidden del main */}
       <main className="flex-grow max-w-6xl mx-auto w-full px-6 py-12">
         
-        {/* CABECERA: Identity Card Horizontal */}
-        <section className="bg-gradient-to-b md:bg-gradient-to-r from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 lg:p-12 mb-10 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center md:items-start gap-10">
-          
-          {/* Efecto de luz de fondo sutil */}
+        {/* CABECERA */}
+        <section 
+          className={`bg-gradient-to-b md:bg-gradient-to-r from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 lg:p-12 mb-10 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center md:items-start gap-10 transform transition-all duration-700 ease-out ${
+            isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <div className="absolute top-0 right-0 w-64 h-64 bg-slate-500/5 blur-3xl rounded-full pointer-events-none"></div>
 
-          {/* Avatar con la misma física que en ProfilePage */}
           <div className="relative group p-1 shrink-0">
             <div className="absolute inset-0 bg-slate-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-700"></div>
             <div className="absolute inset-0 border-2 border-neutral-800 rounded-full group-hover:border-slate-500/50 transition-all duration-500 z-10 pointer-events-none"></div>
-            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-transparent">
+            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-transparent bg-neutral-800">
               {worker.profile_picture_url ? (
                 <img 
                   src={worker.profile_picture_url} 
@@ -91,19 +96,18 @@ function WorkerProfilePage() {
                   alt={worker.nickname} 
                 />
               ) : (
-                <div className="w-full h-full bg-neutral-800 flex items-center justify-center text-5xl md:text-6xl font-black text-slate-500 uppercase transition-all duration-500 group-hover:blur-[1px]">
+                <div className="w-full h-full flex items-center justify-center text-5xl md:text-6xl font-black text-slate-500 uppercase transition-all duration-500 group-hover:blur-[1px]">
                   {worker.nickname.charAt(0)}
                 </div>
               )}
             </div>
           </div>
 
-          {/* Info Principal y Grid de Contacto */}
           <div className="flex-grow text-center md:text-left w-full z-10">
             <h1 className="text-4xl md:text-5xl font-black text-neutral-50 mb-4 tracking-tight">{worker.nickname}</h1>
             
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-8">
-              <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border bg-slate-500/10 text-slate-500 border-slate-500/20 shadow-[0_0_15px_rgba(249,115,22,0.1)]">
+              <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border bg-slate-500/10 text-slate-500 border-slate-500/20 shadow-[0_0_15px_rgba(100,116,139,0.1)]">
                 {worker.worker_profile?.profession || 'Profesional'}
               </span>
               <div className="flex items-center gap-1.5 text-sm font-bold text-neutral-200 bg-neutral-900/80 px-3 py-1.5 rounded-full border border-neutral-800 shadow-inner">
@@ -115,10 +119,8 @@ function WorkerProfilePage() {
               </div>
             </div>
 
-            {/* Grid de Datos de Contacto (Tarjetas minimalistas) */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
-              
-              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900">
+              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900 shadow-sm">
                 <div className="flex items-center gap-2 text-neutral-500 mb-1.5">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                   <span className="text-[10px] font-bold uppercase tracking-wider">Ubicación</span>
@@ -126,7 +128,7 @@ function WorkerProfilePage() {
                 <p className="text-sm font-medium text-neutral-200">{worker.city || 'No disponible'}</p>
               </div>
 
-              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900">
+              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900 shadow-sm">
                 <div className="flex items-center gap-2 text-neutral-500 mb-1.5">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                   <span className="text-[10px] font-bold uppercase tracking-wider">Email</span>
@@ -136,7 +138,7 @@ function WorkerProfilePage() {
                 </a>
               </div>
 
-              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900 group cursor-pointer" onClick={() => copyToClipboard(contactPhone)}>
+              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900 shadow-sm group cursor-pointer" onClick={() => copyToClipboard(contactPhone)}>
                 <div className="flex items-center gap-2 text-neutral-500 mb-1.5">
                   <svg className="w-4 h-4 group-hover:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                   <span className="text-[10px] font-bold uppercase tracking-wider group-hover:text-emerald-500 transition-colors">Teléfono</span>
@@ -157,12 +159,14 @@ function WorkerProfilePage() {
           </div>
         </section>
 
-        {/* CONTENIDO PRINCIPAL: Layout 8/4 */}
+        {/* Corrección 2: Eliminado el transform general del grid padre */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          <div className="lg:col-span-8 space-y-8">
+          {/* Corrección 3: El transform se aplica a la columna izquierda */}
+          <div className={`lg:col-span-8 space-y-8 transform transition-all duration-1000 delay-150 ease-out ${
+            isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}>
             
-            {/* Sección: Descripción Profesional */}
             <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-slate-500/10 flex items-center justify-center text-slate-500">
@@ -177,7 +181,6 @@ function WorkerProfilePage() {
               </div>
             </section>
 
-            {/* Sección: Reseñas */}
             <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-neutral-800/50">
                 <div className="flex items-center gap-3">
@@ -187,19 +190,22 @@ function WorkerProfilePage() {
                   <h2 className="text-xl font-bold text-neutral-100">Reseñas de clientes</h2>
                 </div>
                 
-                {user && Number(user.id) !== Number(worker.id) && !showReviewForm && (
-                  <button 
-                    onClick={() => setShowReviewForm(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded-xl text-xs font-bold text-neutral-200 transition-all cursor-pointer shadow-sm"
-                  >
-                    <svg className="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
-                    Escribir reseña
-                  </button>
-                )}
+                <div className="flex items-center gap-3">
+                  {user && Number(user.id) !== Number(worker.id) && !showReviewForm && (
+                    <button 
+                      onClick={() => setShowReviewForm(true)}
+                      className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded-xl text-xs font-bold text-neutral-200 transition-all cursor-pointer shadow-sm active:scale-95"
+                    >
+                      <svg className="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
+                      Escribir reseña
+                    </button>
+                  )}
+                </div>
               </div>
 
               {showReviewForm && (
-                <div className="mb-10 bg-neutral-900/50 p-6 rounded-2xl border border-neutral-800">
+                // CORRECCIÓN: Quitamos bg-neutral-900/50, p-6, rounded-2xl y border
+                <div className="mb-10">
                   <ReviewForm 
                     workerId={worker.id} 
                     onReviewSuccess={handleReviewSuccess} 
@@ -216,9 +222,11 @@ function WorkerProfilePage() {
             </section>
           </div>
 
-          {/* SIDEBAR: Seguridad (Sticky) */}
+          {/* Corrección 4: El aside no tiene transform, solo el div interior (la tarjeta) lo tiene. Así no se rompe el sticky */}
           <aside className="lg:col-span-4 lg:sticky lg:top-28 z-10">
-            <div className="bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden group">
+            <div className={`bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden group transform transition-all duration-1000 delay-300 ease-out ${
+              isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}>
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-slate-500/10 blur-3xl rounded-full pointer-events-none group-hover:bg-slate-500/20 transition-colors duration-500"></div>
               
               <div className="flex items-center gap-3 mb-5 relative z-10">

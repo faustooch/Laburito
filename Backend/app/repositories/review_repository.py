@@ -1,6 +1,7 @@
 # app/repositories/review_repository.py
 from sqlalchemy.orm import Session
 from app.models.review import Review
+from app.models.user import User
 
 def create_review(db: Session, review_data: dict) -> Review:
     db_review = Review(**review_data)
@@ -9,9 +10,16 @@ def create_review(db: Session, review_data: dict) -> Review:
     db.refresh(db_review)
     return db_review
 
-def get_reviews_by_worker(db: Session, worker_id: int):
-    # Trae todas las reseñas que recibió un trabajador específico
-    return db.query(Review).filter(Review.worker_id == worker_id).all()
+def get_worker_reviews_with_names(db: Session, worker_id: int):
+    # La consulta SQL compleja vive estrictamente acá
+    return db.query(
+        Review.id,
+        Review.rating,
+        Review.comment,
+        Review.worker_id,
+        Review.reviewer_id,
+        User.nickname.label("reviewer_name")
+    ).join(User, Review.reviewer_id == User.id).filter(Review.worker_id == worker_id).all()
 
 def get_review_by_id(db: Session, review_id: int):
     return db.query(Review).filter(Review.id == review_id).first()

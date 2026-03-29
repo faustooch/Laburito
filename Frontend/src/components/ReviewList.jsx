@@ -59,17 +59,19 @@ function ReviewItem({ review, currentUser, onDeleteSuccess }) {
       )}
 
       <div className="relative z-10">
-        <div className="flex justify-between items-start mb-5">
-          <div className="flex flex-col">
-            <span className="text-sm font-bold text-neutral-100 tracking-tight flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-neutral-800 flex items-center justify-center text-[10px] text-neutral-400 uppercase font-black">
+          <div className="flex justify-between items-start mb-5">
+            
+            {/* CORRECCIÓN: Todo dentro de flex, sin mezclar bloques y líneas */}
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700/50 flex items-center justify-center text-xs text-neutral-400 uppercase font-black shadow-inner">
                 {(review.reviewer_name || 'U').charAt(0)}
               </div>
-              {review.reviewer_name || 'Usuario'}
-            </span>
-          </div>
+              <span className="text-sm font-bold text-neutral-100 tracking-tight">
+                {review.reviewer_name || 'Usuario'}
+              </span>
+            </div>
 
-          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3">
             {/* Botón de Eliminar (Solo si es dueño) */}
             {isOwner && !showConfirm && (
               <button 

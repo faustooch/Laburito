@@ -66,10 +66,11 @@ const CustomSelect = ({ options, value, onChange, disabled, placeholder }) => {
 };
 
 function ProfilePage() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth(); // Añadido el logout acá
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
   const [error, setError] = useState('');
   const [validationError, setValidationError] = useState(''); 
   const [isUploadingImage, setIsUploadingImage] = useState(false);
@@ -82,6 +83,9 @@ function ProfilePage() {
   const [showCheckPersonal, setShowCheckPersonal] = useState(false);
   const [isSavingWorker, setIsSavingWorker] = useState(false);
   const [showCheckWorker, setShowCheckWorker] = useState(false);
+
+  const [showDowngradeModal, setShowDowngradeModal] = useState(false);
+  const [isDowngrading, setIsDowngrading] = useState(false);
 
   const [editPersonalData, setEditPersonalData] = useState({ 
     nickname: '', city: '', address: '', date_of_birth: '' 
@@ -117,6 +121,7 @@ function ProfilePage() {
           });
         }
         setIsLoading(false);
+        setTimeout(() => setIsMounted(true), 50);
       } catch (err) {
         setError('No se pudieron cargar los datos del perfil.');
         setIsLoading(false);
@@ -186,6 +191,30 @@ function ProfilePage() {
     }
   };
 
+  const handleDowngradeWorker = async () => {
+    setIsDowngrading(true);
+    setValidationError('');
+
+    try {
+      await userService.downgradeToClient();
+      setProfileData({ ...profileData, role: 'client', worker_profile: null });
+      setShowDowngradeModal(false);
+      
+    } catch (err) {
+      console.error("Error en la baja del perfil:", err);
+      setValidationError(
+        err.detail || err.message || "Ocurrió un error al intentar dar de baja tu perfil. Intentá nuevamente."
+      );
+    } finally {
+      setIsDowngrading(false);
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   const roleDisplay = { client: 'Cliente', worker: 'Trabajador', admin: 'Admin' };
 
   if (isLoading) return <div className="min-h-screen bg-neutral-950 flex flex-col"><Header /><main className="flex-grow flex items-center justify-center"><div className="w-12 h-12 border-4 border-slate-500/20 border-t-slate-500 rounded-full animate-spin"></div></main></div>;
@@ -195,7 +224,8 @@ function ProfilePage() {
       <Header />
 
       <main className="flex-grow w-full max-w-6xl mx-auto px-6 py-12">
-        <header className="mb-10">
+        
+        <header className={`mb-10 transform transition-all duration-700 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h1 className="text-4xl font-black text-neutral-50 tracking-tighter">
             Mi <span className="text-slate-500">Perfil</span>
           </h1>
@@ -212,10 +242,9 @@ function ProfilePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Tarjeta de Identidad - FIXED AL SCROLL */}
-          <div className="lg:col-span-4 lg:top-28 z-30">
-            <div className="bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 flex flex-col items-center text-center shadow-2xl">
+          <div className="lg:col-span-4 lg:sticky lg:top-28 z-30">
+            <div className={`bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 flex flex-col items-center text-center shadow-2xl transform transition-all duration-1000 delay-100 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
               
-              {/* Contenedor de Foto con Blur y Borde Externo */}
               <div className="relative group mb-6 p-1">
                 <div className="absolute inset-0 bg-slate-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-700"></div>
                 <div className="absolute inset-0 border-2 border-neutral-800 rounded-full group-hover:border-slate-500/50 transition-all duration-500 z-10 pointer-events-none"></div>
@@ -249,22 +278,35 @@ function ProfilePage() {
               
               <h2 className="text-2xl font-black text-neutral-50 mb-2 tracking-tight">{profileData.nickname}</h2>
               
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col items-center gap-4 w-full">
                 <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                   profileData.role === 'worker' 
-                    ? 'bg-slate-500/10 text-slate-500 border-slate-500/20 shadow-[0_0_15px_rgba(249,115,22,0.1)]' 
+                    ? 'bg-slate-500/10 text-slate-500 border-slate-500/20 shadow-[0_0_15px_rgba(100,116,139,0.1)]' 
                     : 'bg-neutral-800 text-neutral-400 border-neutral-700'
                 }`}>
                   {roleDisplay[profileData.role]}
                 </span>
+
+                {/* Botón de Logout inyectado acá */}
+                <div className="w-full pt-4 mt-2 border-t border-neutral-800/50">
+                  <button 
+                    onClick={handleLogout} 
+                    className="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all cursor-pointer"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Cerrar Sesión
+                  </button>
+                </div>
               </div>
+
             </div>
           </div>
 
           {/* Secciones de Edición */}
-          <div className="lg:col-span-8 space-y-8">
+          <div className={`lg:col-span-8 space-y-8 transform transition-all duration-1000 delay-150 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             
-            {/* Información Personal */}
             <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
@@ -318,7 +360,6 @@ function ProfilePage() {
               )}
             </section>
 
-            {/* Perfil Profesional */}
             {profileData.role === 'worker' && profileData.worker_profile && (
               <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
                 <div className="flex items-center justify-between mb-8">
@@ -367,6 +408,21 @@ function ProfilePage() {
                     </button>
                   </div>
                 )}
+
+                {!isEditingWorker && (
+                  <div className="mt-10 pt-6 border-t border-neutral-800/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                      <h4 className="text-sm font-bold text-red-400">Zona de Peligro</h4>
+                      <p className="text-xs text-neutral-500 mt-1 max-w-sm">Al darte de baja, tu perfil dejará de ser visible para los clientes de forma inmediata.</p>
+                    </div>
+                    <button 
+                      onClick={() => setShowDowngradeModal(true)}
+                      className="px-5 py-2 bg-red-500/5 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap"
+                    >
+                      Dar de baja mi perfil laboral
+                    </button>
+                  </div>
+                )}
               </section>
             )}
 
@@ -385,7 +441,48 @@ function ProfilePage() {
           </div>
         </div>
       </main>
+      
       <Footer />
+
+      {showDowngradeModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
+            onClick={() => !isDowngrading && setShowDowngradeModal(false)}
+          ></div>
+          
+          <div className="relative bg-neutral-900 border border-neutral-800 rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-300">
+            <div className="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-6 border border-red-500/20 shadow-inner">
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+            </div>
+            
+            <h3 className="text-2xl font-black text-white mb-3 tracking-tight">¿Dar de baja tu perfil?</h3>
+            <p className="text-neutral-400 text-sm mb-8 leading-relaxed">
+              Vas a dejar de aparecer en las búsquedas y perderás todo tu historial de calificaciones. Esta acción no se puede deshacer.
+            </p>
+            
+            <div className="flex flex-col-reverse sm:flex-row gap-3 justify-end pt-2 border-t border-neutral-800/50">
+              <button 
+                onClick={() => setShowDowngradeModal(false)} 
+                disabled={isDowngrading} 
+                className="px-6 py-2.5 text-sm font-bold text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-xl transition-all cursor-pointer w-full sm:w-auto text-center"
+              >
+                Cancelar
+              </button>
+              <button 
+                onClick={handleDowngradeWorker} 
+                disabled={isDowngrading} 
+                className="bg-red-600 hover:bg-red-500 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-colors shadow-lg active:scale-95 flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer"
+              >
+                {isDowngrading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : 'Sí, dar de baja'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
