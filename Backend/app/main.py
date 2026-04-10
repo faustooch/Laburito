@@ -4,15 +4,15 @@ from app.db.base import Base
 from fastapi.middleware.cors import CORSMiddleware
 
 # Importamos los modelos para que SQLAlchemy los registre y cree las tablas
-from app.models import user
-from app.models import review
+from app.domains.users import models as user
+from app.domains.reviews import models as review
 
 # Importamos el router de usuarios
-from app.api.v1.routes import users
-from app.api.v1.routes import auth
-from app.api.v1.routes import reviews
-from app.api.v1.routes import professions
-from app.api.v1.routes import stats
+from app.domains.users.api import routes as users
+from app.domains.auth.api import routes as auth
+from app.domains.reviews.api import routes as reviews
+from app.domains.professions.api import routes as professions
+from app.domains.stats.api import routes as stats
 
 # Crea las tablas en la base de datos si no existen
 Base.metadata.create_all(bind=engine)

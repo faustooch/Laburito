@@ -1,34 +1,32 @@
-# app/core/config.py
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import field_validator
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "API de Usuarios"
-    API_V1_STR: str = "/api/v1"
-
-    # Credenciales de Google (Ambas obligatorias y vienen del .env)
+    PROJECT_NAME: str
+    API_V1_STR: str
     GOOGLE_CLIENT_ID: str
-    GOOGLE_CLIENT_SECRET: str  # <--- ¡Agregamos esta línea!
+    GOOGLE_CLIENT_SECRET: str
+    
+    @field_validator("GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", mode="before")
+    @classmethod
+    def strip_quotes_and_spaces(cls, v: str) -> str:
+        if isinstance(v, str):
+            return v.strip(' "\'')
+        return v
 
-    # Configuración de PostgreSQL
-    POSTGRES_SERVER: str = "localhost"
-    POSTGRES_USER: str = "postgres"
-
-    # Esta variable ahora es obligatoria y viene del .env
+    POSTGRES_SERVER: str
+    POSTGRES_USER: str
     POSTGRES_PASSWORD: str
-    POSTGRES_DB: str = "fastapi_db"
-    POSTGRES_PORT: str = "5432"
+    POSTGRES_DB: str
+    POSTGRES_PORT: str
 
     @property
     def database_url(self) -> str:
         return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
-    # Configuración de Seguridad (JWT)
-    # Esta variable ahora es obligatoria y viene del .env
     SECRET_KEY: str
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
-
-    # Configuración de Pydantic para leer el archivo .env
+    ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 settings = Settings()
