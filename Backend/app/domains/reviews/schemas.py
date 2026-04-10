@@ -1,4 +1,3 @@
-# app/schemas/review.py
 from pydantic import BaseModel, Field
 from typing import Optional
 
@@ -17,10 +16,9 @@ class ReviewResponse(ReviewBase):
     class Config:
         from_attributes = True
 
-# Este es el que usamos dentro del perfil del trabajador
 class ReviewDetail(ReviewBase):
     id: int
-    reviewer_id: int  # <--- AGREGÁ ESTA LÍNEA AQUÍ TAMBIÉN
+    reviewer_id: int
     reviewer_name: str
 
     class Config:

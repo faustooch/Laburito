@@ -1,4 +1,3 @@
-# app/api/v1/routes/stats.py
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.api.deps import get_db

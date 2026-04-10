@@ -1,4 +1,3 @@
-# app/repositories/review_repository.py
 from sqlalchemy.orm import Session
 from app.domains.reviews.models import Review
 from app.domains.users.models import User
@@ -11,7 +10,6 @@ def create_review(db: Session, review_data: dict) -> Review:
     return db_review
 
 def get_worker_reviews_with_names(db: Session, worker_id: int):
-    # La consulta SQL compleja vive estrictamente acá
     return db.query(
         Review.id,
         Review.rating,

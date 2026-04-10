@@ -4,8 +4,7 @@ router = APIRouter()
 
 @router.get("/professions")
 def get_professions():
-    """Endpoint temporal para devolver los oficios disponibles"""
-    # Después esto lo cambiamos por un query a la base de datos: db.query(Profession).all()
+    """Oficios hardcodeados por el momento, en el futuro se podrían agregar a la base de datos..."""
     return [
         {"id": 1, "name": "Albañilería"},
         {"id": 2, "name": "Carpintería"},

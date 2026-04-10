@@ -38,7 +38,6 @@ def get_worker_reviews(
     """
     Obtiene todas las reseñas que recibió un trabajador. (Público)
     """
-    # Como es un GET simple, no hace falta atrapar errores complejos acá.
     return review_service.get_worker_reviews(db=db, worker_id=worker_id)
 
 

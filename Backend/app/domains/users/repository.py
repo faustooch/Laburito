@@ -1,4 +1,3 @@
-# app/repositories/user_repository.py
 from sqlalchemy.orm import Session
 from sqlalchemy import func, or_
 from app.domains.users.models import User, ClientProfile, WorkerProfile, Role
@@ -19,7 +18,6 @@ def create_user(db: Session, user_data: dict) -> User:
     db.commit()
     db.refresh(db_user)
 
-    # Perfil cliente por defecto
     new_client_profile = ClientProfile(user_id=db_user.id)
     db.add(new_client_profile)
     db.commit()

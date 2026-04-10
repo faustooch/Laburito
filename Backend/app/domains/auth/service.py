@@ -1,18 +1,14 @@
-# app/services/auth_service.py
 import logging
 import requests
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
-
 from app.core.config import settings
 from app.domains.users import repository as user_repository
 from app.core.security import verify_password
 
-
 logger = logging.getLogger(__name__)
-
 
 def authenticate_standard(db: Session, email: str, password: str):
     """Valida credenciales estándar y devuelve el usuario."""
@@ -31,7 +27,6 @@ def authenticate_standard(db: Session, email: str, password: str):
         )
 
     return user
-
 
 def authenticate_google(db: Session, auth_code: str):
     """Intercambia el código, valida el JWT de Google y busca/crea al usuario."""

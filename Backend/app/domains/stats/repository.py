@@ -1,4 +1,3 @@
-# app/repositories/stats_repository.py
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from app.domains.users.models import User, Role

@@ -1,9 +1,8 @@
-# app/schemas/user.py
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List
 from app.domains.users.models import Role
 from datetime import date
-from app.domains.reviews.schemas import ReviewDetail  # <--- Importamos el detalle de reseña
+from app.domains.reviews.schemas import ReviewDetail
 
 
 # --------- Requests ---------
@@ -70,10 +69,8 @@ class UserResponse(BaseModel):
     address: Optional[str] = None
     date_of_birth: Optional[date] = None
     profile_picture_url: Optional[str] = None
-
-    # Datos dinámicos para el perfil del trabajador
     rating: float = 0.0
-    reviews: List[ReviewDetail] = []  # <--- Lista de reseñas detalladas
+    reviews: List[ReviewDetail] = []
 
     worker_profile: Optional[WorkerProfileResponse] = None
     client_profile: Optional[ClientProfileResponse] = None

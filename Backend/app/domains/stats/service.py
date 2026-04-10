@@ -1,4 +1,3 @@
-# app/services/stats_service.py
 from sqlalchemy.orm import Session
 from app.domains.stats import repository as stats_repository
 from app.domains.users.models import Role

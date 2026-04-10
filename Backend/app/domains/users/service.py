@@ -1,4 +1,3 @@
-# app/services/user_service.py
 from sqlalchemy.orm import Session
 from app.domains.users import repository as user_repository
 from app.core.security import get_password_hash

@@ -1,9 +1,7 @@
-# app/db/session.py
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
 
-# Usamos la URL autogenerada del config
 engine = create_engine(settings.database_url)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
