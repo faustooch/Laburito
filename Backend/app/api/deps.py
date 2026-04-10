@@ -7,8 +7,8 @@ from pydantic import ValidationError
 
 from app.db.session import SessionLocal
 from app.core.config import settings  # <-- Ahora importamos settings
-from app.models.user import User
-from app.repositories import user_repository
+from app.domains.users.models import User
+from app.domains.users import repository as user_repository
 
 # Usamos la ruta que configuraste para el login
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/login")
