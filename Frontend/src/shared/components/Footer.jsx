@@ -54,7 +54,7 @@ function Footer() {
               href="https://github.com/faustooch" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:text-white hover:border-neutral-600 transition-all cursor-pointer shadow-sm hover:shadow-md"
+              className="w-8 h-8 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:text-white hover:border-neutral-600 transition-all cursor-pointer hover:"
               title="Visitar perfil de GitHub"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

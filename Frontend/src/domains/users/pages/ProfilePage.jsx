@@ -35,7 +35,7 @@ const CustomSelect = ({ options, value, onChange, disabled, placeholder }) => {
         className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all flex justify-between items-center select-none ${
           disabled 
             ? 'bg-neutral-900/30 border border-neutral-800 text-neutral-500 cursor-not-allowed opacity-60' 
-            : `bg-neutral-950 border text-neutral-100 cursor-pointer ${isOpen ? 'border-slate-500 ring-1 ring-slate-500/20' : 'border-neutral-800 hover:border-neutral-700'}`
+            : `bg-neutral-950 border text-neutral-100 cursor-pointer ${isOpen ? 'border-slate-500' : 'border-neutral-800 hover:border-neutral-700'}`
         }`}
       >
         <span className={!selectedOption ? 'text-neutral-500' : 'font-medium'}>
@@ -45,7 +45,7 @@ const CustomSelect = ({ options, value, onChange, disabled, placeholder }) => {
       </div>
 
       {isOpen && (
-        <div className="absolute z-50 w-full mt-2 bg-neutral-900 border border-neutral-800 rounded-xl shadow-2xl max-h-60 overflow-y-auto custom-scrollbar backdrop-blur-xl">
+        <div className="absolute z-50 w-full mt-2 bg-neutral-900 border border-neutral-800 rounded-xl max-h-60 overflow-y-auto custom-scrollbar">
           {options.length === 0 ? (
             <div className="px-4 py-3 text-sm text-neutral-500 text-center italic">Cargando opciones...</div>
           ) : (
@@ -243,7 +243,7 @@ function ProfilePage() {
           
           {/* Tarjeta de Identidad - FIXED AL SCROLL */}
           <div className="lg:col-span-4 lg:sticky lg:top-28 z-30">
-            <div className={`bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 flex flex-col items-center text-center shadow-2xl transform transition-all duration-1000 delay-100 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+            <div className={`bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 flex flex-col items-center text-center transform transition-all duration-1000 delay-100 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
               
               <div className="relative group mb-6 p-1">
                 <div className="absolute inset-0 bg-slate-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-700"></div>
@@ -281,7 +281,7 @@ function ProfilePage() {
               <div className="flex flex-col items-center gap-4 w-full">
                 <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                   profileData.role === 'worker' 
-                    ? 'bg-slate-500/10 text-slate-500 border-slate-500/20 shadow-[0_0_15px_rgba(100,116,139,0.1)]' 
+                    ? 'bg-slate-500/10 text-slate-500 border-slate-500/20' 
                     : 'bg-neutral-800 text-neutral-400 border-neutral-700'
                 }`}>
                   {roleDisplay[profileData.role]}
@@ -307,7 +307,7 @@ function ProfilePage() {
           {/* Secciones de Edición */}
           <div className={`lg:col-span-8 space-y-8 transform transition-all duration-1000 delay-150 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             
-            <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
+            <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 transition-all hover:border-neutral-700/50">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-slate-500/10 flex items-center justify-center text-slate-500">
@@ -326,7 +326,7 @@ function ProfilePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Nickname</label>
-                  <input type="text" name="nickname" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.nickname : profileData.nickname} onChange={handlePersonalChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
+                  <input type="text" name="nickname" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.nickname : profileData.nickname} onChange={handlePersonalChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Email</label>
@@ -338,11 +338,11 @@ function ProfilePage() {
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Dirección</label>
-                  <input type="text" name="address" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.address : profileData.address || ''} onChange={handlePersonalChange} placeholder="Calle y altura" className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
+                  <input type="text" name="address" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.address : profileData.address || ''} onChange={handlePersonalChange} placeholder="Calle y altura" className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
                 </div>
                 <div className="md:col-span-2 flex flex-col gap-1.5">
                   <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Fecha de Nacimiento</label>
-                  <input type="date" name="date_of_birth" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.date_of_birth : profileData.date_of_birth || ''} onChange={handlePersonalChange} className={`w-full md:w-1/2 rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none [color-scheme:dark] ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
+                  <input type="date" name="date_of_birth" disabled={!isEditingPersonal} value={isEditingPersonal ? editPersonalData.date_of_birth : profileData.date_of_birth || ''} onChange={handlePersonalChange} className={`w-full md:w-1/2 rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none [color-scheme:dark] ${isEditingPersonal ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
                 </div>
               </div>
 
@@ -352,7 +352,7 @@ function ProfilePage() {
                   <button 
                     onClick={savePersonalData} 
                     disabled={isSavingPersonal}
-                    className={`min-w-[160px] text-white text-sm font-bold px-8 py-2.5 rounded-xl transition-all duration-300 shadow-lg cursor-pointer flex items-center justify-center gap-2 ${showCheckPersonal ? 'bg-green-600' : 'bg-slate-600 hover:bg-slate-500 active:scale-95'}`}
+                    className={`min-w-[160px] text-white text-sm font-bold px-8 py-2.5 rounded-xl transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 ${showCheckPersonal ? 'bg-green-600' : 'bg-slate-600 hover:bg-slate-500 active:scale-95'}`}
                   >
                     {isSavingPersonal ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : showCheckPersonal ? '¡Guardado!' : 'Guardar Cambios'}
                   </button>
@@ -361,7 +361,7 @@ function ProfilePage() {
             </section>
 
             {profileData.role === 'worker' && profileData.worker_profile && (
-              <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
+              <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 transition-all hover:border-neutral-700/50">
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-slate-500/10 flex items-center justify-center text-slate-500">
@@ -384,15 +384,15 @@ function ProfilePage() {
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">WhatsApp / Tel</label>
-                    <input type="tel" name="contact_phone" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.contact_phone : profileData.worker_profile.contact_phone || ''} onChange={handleWorkerChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
+                    <input type="tel" name="contact_phone" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.contact_phone : profileData.worker_profile.contact_phone || ''} onChange={handleWorkerChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
                   </div>
                   <div className="md:col-span-2 space-y-1.5">
                     <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Email de Contacto</label>
-                    <input type="email" name="contact_email" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.contact_email : profileData.worker_profile.contact_email || ''} onChange={handleWorkerChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
+                    <input type="email" name="contact_email" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.contact_email : profileData.worker_profile.contact_email || ''} onChange={handleWorkerChange} className={`w-full rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`} />
                   </div>
                   <div className="md:col-span-2 space-y-1.5">
                     <label className="text-xs font-bold text-neutral-500 uppercase tracking-tighter ml-1">Descripción de servicios</label>
-                    <textarea name="description" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.description : profileData.worker_profile.description || ''} onChange={handleWorkerChange} rows="4" className={`w-full rounded-xl px-4 py-2.5 text-sm resize-none transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white shadow-inner' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`}></textarea>
+                    <textarea name="description" disabled={!isEditingWorker} value={isEditingWorker ? editWorkerData.description : profileData.worker_profile.description || ''} onChange={handleWorkerChange} rows="4" className={`w-full rounded-xl px-4 py-2.5 text-sm resize-none transition-all focus:outline-none ${isEditingWorker ? 'bg-neutral-950 border border-neutral-800 focus:border-slate-500 text-white' : 'bg-transparent border border-neutral-800/50 text-neutral-500'}`}></textarea>
                   </div>
                 </div>
 
@@ -402,7 +402,7 @@ function ProfilePage() {
                     <button 
                       onClick={saveWorkerData} 
                       disabled={isSavingWorker}
-                      className={`min-w-[160px] text-white text-sm font-bold px-8 py-2.5 rounded-xl transition-all duration-300 shadow-lg cursor-pointer flex items-center justify-center gap-2 ${showCheckWorker ? 'bg-green-600' : 'bg-slate-600 hover:bg-slate-500 active:scale-95'}`}
+                      className={`min-w-[160px] text-white text-sm font-bold px-8 py-2.5 rounded-xl transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 ${showCheckWorker ? 'bg-green-600' : 'bg-slate-600 hover:bg-slate-500 active:scale-95'}`}
                     >
                       {isSavingWorker ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : showCheckWorker ? '¡Actualizado!' : 'Actualizar Perfil'}
                     </button>
@@ -427,13 +427,13 @@ function ProfilePage() {
             )}
 
             {profileData.role === 'client' && (
-              <div className="bg-gradient-to-r from-slate-500/10 to-transparent border border-slate-500/20 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm overflow-hidden relative group">
+              <div className="bg-gradient-to-r from-slate-500/10 to-transparent border border-slate-500/20 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-slate-500/5 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-slate-500/10 transition-colors duration-700"></div>
                 <div className="relative z-10">
                   <h3 className="text-xl font-black text-neutral-50 mb-2">¿Querés trabajar en Laburito?</h3>
                   <p className="text-sm text-neutral-400 max-w-md">Convertite en Trabajador, publicá tus servicios y empezá a recibir consultas hoy mismo.</p>
                 </div>
-                <button onClick={() => navigate('/become-worker')} className="relative z-10 bg-slate-500 hover:bg-slate-600 text-white text-xs font-black uppercase tracking-widest px-8 py-3.5 rounded-xl transition-all shadow-xl active:scale-95 cursor-pointer">
+                <button onClick={() => navigate('/become-worker')} className="relative z-10 bg-slate-500 hover:bg-slate-600 text-white text-xs font-black uppercase tracking-widest px-8 py-3.5 rounded-xl transition-all active:scale-95 cursor-pointer">
                   Empezar ahora
                 </button>
               </div>
@@ -447,12 +447,12 @@ function ProfilePage() {
       {showDowngradeModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div 
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
+            className="absolute inset-0 bg-black/60 transition-opacity" 
             onClick={() => !isDowngrading && setShowDowngradeModal(false)}
           ></div>
           
-          <div className="relative bg-neutral-900 border border-neutral-800 rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-300">
-            <div className="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-6 border border-red-500/20 shadow-inner">
+          <div className="relative bg-neutral-900 border border-neutral-800 rounded-3xl p-8 max-w-md w-full animate-in zoom-in-95 duration-300">
+            <div className="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-6 border border-red-500/20">
               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
               </svg>
@@ -474,7 +474,7 @@ function ProfilePage() {
               <button 
                 onClick={handleDowngradeWorker} 
                 disabled={isDowngrading} 
-                className="bg-red-600 hover:bg-red-500 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-colors shadow-lg active:scale-95 flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer"
+                className="bg-red-600 hover:bg-red-500 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-colors active:scale-95 flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer"
               >
                 {isDowngrading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : 'Sí, dar de baja'}
               </button>

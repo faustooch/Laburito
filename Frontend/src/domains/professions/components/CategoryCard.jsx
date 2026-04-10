@@ -5,7 +5,7 @@ function CategoryCard({ category, onClick }) {
   return (
     <div 
       onClick={() => onClick(category.name)} 
-      className="group min-w-[200px] md:min-w-[260px] aspect-[4/5] relative flex flex-col items-start justify-end p-6 rounded-[2rem] border border-neutral-800 hover:border-slate-500/40 transition-all duration-500 cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-slate-500/10 hover:-translate-y-2 bg-neutral-950 flex-shrink-0"
+      className="group min-w-[200px] md:min-w-[260px] aspect-[4/5] relative flex flex-col items-start justify-end p-6 rounded-[2rem] border border-neutral-800 hover:border-slate-500/40 transition-all duration-500 cursor-pointer overflow-hidden hover: hover:-500/10 hover:-translate-y-2 bg-neutral-950 flex-shrink-0"
     >
       {/* Capa 1: Imagen de fondo con zoom cinematográfico */}
       <img 
@@ -22,7 +22,7 @@ function CategoryCard({ category, onClick }) {
       
       {/* Capa 4: Contenido interactivo */}
       <div className="z-20 w-full relative transform transition-transform duration-500 group-hover:-translate-y-1">
-        <span className="block text-xl font-black text-neutral-100 tracking-tight group-hover:text-white drop-shadow-lg transition-colors leading-tight">
+        <span className="block text-xl font-black text-neutral-100 tracking-tight group-hover:text-white drop- transition-colors leading-tight">
           {category.name}
         </span>
         

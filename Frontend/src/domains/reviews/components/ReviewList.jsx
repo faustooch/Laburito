@@ -23,14 +23,14 @@ function ReviewItem({ review, currentUser, onDeleteSuccess }) {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-neutral-800/50 bg-neutral-900/40 p-6 transition-all duration-300 hover:border-neutral-700/50 hover:bg-neutral-900/60 shadow-sm group">
+    <div className="relative overflow-hidden rounded-3xl border border-neutral-800/50 bg-neutral-900/40 p-6 transition-all duration-300 hover:border-neutral-700/50 hover:bg-neutral-900/60 group">
       
       {/* Luz de fondo sutil */}
       <div className="absolute -right-10 -top-10 h-32 w-32 bg-slate-500/5 blur-3xl rounded-full pointer-events-none transition-colors group-hover:bg-slate-500/10" />
 
       {/* OVERLAY DE CONFIRMACIÓN CUSTOM */}
       {showConfirm && (
-        <div className="absolute inset-0 z-20 bg-neutral-950/80 backdrop-blur-md flex flex-col items-center justify-center p-6 transition-all animate-in fade-in duration-200">
+        <div className="absolute inset-0 z-20 bg-neutral-950/80 flex flex-col items-center justify-center p-6 transition-all animate-in fade-in duration-200">
           {isDeleting ? (
             <div className="flex flex-col items-center gap-3">
               <div className="w-6 h-6 border-2 border-slate-500/30 border-t-slate-500 rounded-full animate-spin"></div>
@@ -48,7 +48,7 @@ function ReviewItem({ review, currentUser, onDeleteSuccess }) {
                 </button>
                 <button 
                   onClick={executeDelete} 
-                  className="px-5 py-2 bg-red-500/10 text-red-500 border border-red-500/20 text-xs font-bold rounded-xl hover:bg-red-500 hover:text-white transition-all cursor-pointer shadow-sm active:scale-95"
+                  className="px-5 py-2 bg-red-500/10 text-red-500 border border-red-500/20 text-xs font-bold rounded-xl hover:bg-red-500 hover:text-white transition-all cursor-pointer active:scale-95"
                 >
                   Sí, eliminar
                 </button>
@@ -63,7 +63,7 @@ function ReviewItem({ review, currentUser, onDeleteSuccess }) {
             
             {/* CORRECCIÓN: Todo dentro de flex, sin mezclar bloques y líneas */}
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700/50 flex items-center justify-center text-xs text-neutral-400 uppercase font-black shadow-inner">
+              <div className="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700/50 flex items-center justify-center text-xs text-neutral-400 uppercase font-black">
                 {(review.reviewer_name || 'U').charAt(0)}
               </div>
               <span className="text-sm font-bold text-neutral-100 tracking-tight">
@@ -85,7 +85,7 @@ function ReviewItem({ review, currentUser, onDeleteSuccess }) {
               </button>
             )}
 
-            <div className="flex items-center gap-1.5 bg-neutral-950/80 px-3 py-1.5 rounded-xl border border-neutral-800/50 shadow-inner">
+            <div className="flex items-center gap-1.5 bg-neutral-950/80 px-3 py-1.5 rounded-xl border border-neutral-800/50">
               <svg className="w-3.5 h-3.5 text-slate-500 fill-current" viewBox="0 0 24 24">
                 <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
               </svg>

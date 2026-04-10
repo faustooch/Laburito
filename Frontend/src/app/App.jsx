@@ -42,7 +42,7 @@ function App() {
             <h1 className="text-9xl font-black text-neutral-900 select-none">404</h1>
             <h2 className="text-2xl font-bold text-neutral-100 mt-4 mb-2">Página no encontrada</h2>
             <p className="text-neutral-500 mb-8 max-w-md">La ruta que intentás buscar no existe, fue movida o no tenés los permisos necesarios para verla.</p>
-            <a href="/" className="bg-slate-500 hover:bg-slate-400 text-white font-bold px-6 py-3 rounded-xl transition-colors shadow-lg active:scale-95">
+            <a href="/" className="bg-slate-500 hover:bg-slate-400 text-white font-bold px-6 py-3 rounded-xl transition-colors active:scale-95">
               Volver al inicio
             </a>
           </div>

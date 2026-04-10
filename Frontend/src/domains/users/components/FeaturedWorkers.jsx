@@ -41,7 +41,7 @@ function FeaturedWorkers() {
         
         <button 
           onClick={() => navigate('/search')} 
-          className="group flex items-center justify-center gap-2 px-6 py-3 rounded-2xl border border-neutral-800 bg-neutral-900/80 text-neutral-300 hover:text-slate-500 hover:border-slate-500/50 hover:bg-neutral-900 transition-all shadow-sm active:scale-95 cursor-pointer backdrop-blur-sm w-full md:w-auto shrink-0"
+          className="group flex items-center justify-center gap-2 px-6 py-3 rounded-2xl border border-neutral-800 bg-neutral-900/80 text-neutral-300 hover:text-slate-500 hover:border-slate-500/50 hover:bg-neutral-900 transition-all active:scale-95 cursor-pointer w-full md:w-auto shrink-0"
         >
           <span className="text-xs font-bold uppercase tracking-widest">Ver todos</span>
           <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,7 +63,7 @@ function FeaturedWorkers() {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-20 px-4 bg-neutral-900/20 border border-dashed border-neutral-800/80 rounded-3xl mx-4 text-center">
-          <div className="w-16 h-16 bg-neutral-900 border border-neutral-800 rounded-2xl flex items-center justify-center text-neutral-600 mb-4 shadow-inner">
+          <div className="w-16 h-16 bg-neutral-900 border border-neutral-800 rounded-2xl flex items-center justify-center text-neutral-600 mb-4">
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
           </div>
           <h4 className="text-xl font-bold text-neutral-200 mb-2">Aún no hay destacados</h4>

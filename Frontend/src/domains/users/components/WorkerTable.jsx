@@ -58,7 +58,7 @@ function WorkerTable({ workers }) {
 
 
       {/* VISTA DESKTOP: Tabla clásica (Oculta en móviles, visible desde 'md' hacia arriba) */}
-      <div className="hidden md:block overflow-x-auto rounded-2xl border border-neutral-800 bg-neutral-900/20 backdrop-blur-sm">
+      <div className="hidden md:block overflow-x-auto rounded-2xl border border-neutral-800 bg-neutral-900/20">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-neutral-800 bg-neutral-900/50">
@@ -126,7 +126,7 @@ function WorkerTable({ workers }) {
                       e.stopPropagation();
                       handleRowClick(worker.id);
                     }}
-                    className="px-4 py-2 bg-neutral-800 group-hover:bg-slate-600 text-neutral-300 group-hover:text-white text-xs font-bold rounded-xl transition-all cursor-pointer shadow-sm active:scale-95"
+                    className="px-4 py-2 bg-neutral-800 group-hover:bg-slate-600 text-neutral-300 group-hover:text-white text-xs font-bold rounded-xl transition-all cursor-pointer active:scale-95"
                   >
                     Ver Perfil
                   </button>

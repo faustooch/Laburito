@@ -158,7 +158,7 @@ function HomePage() {
               onClick={() => navigate('/register')} 
               className={`bg-slate-600 text-white font-bold text-lg px-8 py-4 rounded-full 
                          transition-all duration-300 hover:bg-slate-500 hover:scale-105 active:scale-95 
-                         shadow-[0_0_20px_rgba(100,116,139,0.4)] cursor-pointer
+                         cursor-pointer
                          ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
             >
               Empezar ahora gratis
@@ -182,12 +182,12 @@ function HomePage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
                 
                 {/* Paso 1 */}
-                <div className="p-10 rounded-[2rem] bg-gradient-to-b from-neutral-900/80 to-neutral-950 border border-neutral-800/80 text-center relative overflow-hidden group hover:-translate-y-3 hover:border-slate-500/40 hover:shadow-[0_15px_40px_-15px_rgba(100,116,139,0.3)] transition-all duration-500 cursor-default">
+                <div className="p-10 rounded-[2rem] bg-gradient-to-b from-neutral-900/80 to-neutral-950 border border-neutral-800/80 text-center relative overflow-hidden group hover:-translate-y-3 hover:border-slate-500/40 hover: transition-all duration-500 cursor-default">
                   <div className="absolute -top-6 -right-6 text-[180px] leading-none font-black text-neutral-800/30 group-hover:text-slate-500/10 group-hover:-translate-y-4 group-hover:-translate-x-2 group-hover:scale-110 transition-all duration-700 select-none pointer-events-none z-0">
                     1
                   </div>
                   
-                  <div className="w-20 h-20 rounded-2xl bg-neutral-900 border border-neutral-800 text-neutral-500 flex items-center justify-center mb-8 mx-auto relative z-10 group-hover:bg-slate-500/10 group-hover:border-slate-500/50 group-hover:text-slate-400 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(100,116,139,0.3)] transition-all duration-500">
+                  <div className="w-20 h-20 rounded-2xl bg-neutral-900 border border-neutral-800 text-neutral-500 flex items-center justify-center mb-8 mx-auto relative z-10 group-hover:bg-slate-500/10 group-hover:border-slate-500/50 group-hover:text-slate-400 group-hover:scale-110 group-hover: transition-all duration-500">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
@@ -202,12 +202,12 @@ function HomePage() {
                 </div>
 
                 {/* Paso 2 */}
-                <div className="p-10 rounded-[2rem] bg-gradient-to-b from-neutral-900/80 to-neutral-950 border border-neutral-800/80 text-center relative overflow-hidden group hover:-translate-y-3 hover:border-slate-500/40 hover:shadow-[0_15px_40px_-15px_rgba(100,116,139,0.3)] transition-all duration-500 cursor-default">
+                <div className="p-10 rounded-[2rem] bg-gradient-to-b from-neutral-900/80 to-neutral-950 border border-neutral-800/80 text-center relative overflow-hidden group hover:-translate-y-3 hover:border-slate-500/40 hover: transition-all duration-500 cursor-default">
                   <div className="absolute -top-6 -right-6 text-[180px] leading-none font-black text-neutral-800/30 group-hover:text-slate-500/10 group-hover:-translate-y-4 group-hover:-translate-x-2 group-hover:scale-110 transition-all duration-700 select-none pointer-events-none z-0">
                     2
                   </div>
                   
-                  <div className="w-20 h-20 rounded-2xl bg-neutral-900 border border-neutral-800 text-neutral-500 flex items-center justify-center mb-8 mx-auto relative z-10 group-hover:bg-slate-500/10 group-hover:border-slate-500/50 group-hover:text-slate-400 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(100,116,139,0.3)] transition-all duration-500 delay-75">
+                  <div className="w-20 h-20 rounded-2xl bg-neutral-900 border border-neutral-800 text-neutral-500 flex items-center justify-center mb-8 mx-auto relative z-10 group-hover:bg-slate-500/10 group-hover:border-slate-500/50 group-hover:text-slate-400 group-hover:scale-110 group-hover: transition-all duration-500 delay-75">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M21 16a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v11z" />
                     </svg>
@@ -222,12 +222,12 @@ function HomePage() {
                 </div>
 
                 {/* Paso 3 */}
-                <div className="p-10 rounded-[2rem] bg-gradient-to-b from-neutral-900/80 to-neutral-950 border border-neutral-800/80 text-center relative overflow-hidden group hover:-translate-y-3 hover:border-slate-500/40 hover:shadow-[0_15px_40px_-15px_rgba(100,116,139,0.3)] transition-all duration-500 cursor-default">
+                <div className="p-10 rounded-[2rem] bg-gradient-to-b from-neutral-900/80 to-neutral-950 border border-neutral-800/80 text-center relative overflow-hidden group hover:-translate-y-3 hover:border-slate-500/40 hover: transition-all duration-500 cursor-default">
                   <div className="absolute -top-6 -right-6 text-[180px] leading-none font-black text-neutral-800/30 group-hover:text-slate-500/10 group-hover:-translate-y-4 group-hover:-translate-x-2 group-hover:scale-110 transition-all duration-700 select-none pointer-events-none z-0">
                     3
                   </div>
                   
-                  <div className="w-20 h-20 rounded-2xl bg-neutral-900 border border-neutral-800 text-neutral-500 flex items-center justify-center mb-8 mx-auto relative z-10 group-hover:bg-slate-500/10 group-hover:border-slate-500/50 group-hover:text-slate-400 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(100,116,139,0.3)] transition-all duration-500 delay-150">
+                  <div className="w-20 h-20 rounded-2xl bg-neutral-900 border border-neutral-800 text-neutral-500 flex items-center justify-center mb-8 mx-auto relative z-10 group-hover:bg-slate-500/10 group-hover:border-slate-500/50 group-hover:text-slate-400 group-hover:scale-110 group-hover: transition-all duration-500 delay-150">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.907a1 1 0 00.95-.69l1.519-4.674z" />
                     </svg>
@@ -263,7 +263,7 @@ function HomePage() {
       {/* FILA 1: Dirección Normal */}
       <div className="flex animate-scroll gap-4 py-2 group-hover:[animation-play-state:paused]">
         {[...filteredProfessions, ...filteredProfessions].map((prof, index) => (
-          <div key={`row1-${index}`} className="label-pills-base px-8 py-4 rounded-2xl border text-sm font-bold whitespace-nowrap bg-neutral-950 text-neutral-300 border-neutral-800 flex items-center gap-3 cursor-default shadow-lg">
+          <div key={`row1-${index}`} className="label-pills-base px-8 py-4 rounded-2xl border text-sm font-bold whitespace-nowrap bg-neutral-950 text-neutral-300 border-neutral-800 flex items-center gap-3 cursor-default">
             <div className="w-2 h-2 rounded-full bg-slate-400"></div>
             {prof.name}
           </div>
@@ -274,7 +274,7 @@ function HomePage() {
       <div className="flex animate-scroll-reverse gap-4 py-2 group-hover:[animation-play-state:paused]">
         {/* Invertimos el array para que no se vean exactamente iguales una arriba de la otra */}
         {[...filteredProfessions].reverse().concat([...filteredProfessions].reverse()).map((prof, index) => (
-          <div key={`row2-${index}`} className="label-pills-base px-8 py-4 rounded-2xl border text-sm font-bold whitespace-nowrap bg-neutral-900/50 text-neutral-400 border-neutral-800 flex items-center gap-3 cursor-default shadow-lg">
+          <div key={`row2-${index}`} className="label-pills-base px-8 py-4 rounded-2xl border text-sm font-bold whitespace-nowrap bg-neutral-900/50 text-neutral-400 border-neutral-800 flex items-center gap-3 cursor-default">
             <div className="w-2 h-2 rounded-full bg-slate-500/50"></div>
             {prof.name}
           </div>
@@ -321,13 +321,13 @@ function HomePage() {
             <div className="absolute top-0 w-full max-w-5xl h-px bg-gradient-to-r from-transparent via-neutral-800 to-transparent"></div>
             
             <ScrollReveal>
-              <div className="max-w-3xl mx-auto bg-gradient-to-tr from-neutral-900 to-neutral-800 rounded-3xl p-12 border border-neutral-700 shadow-2xl relative overflow-hidden">
+              <div className="max-w-3xl mx-auto bg-gradient-to-tr from-neutral-900 to-neutral-800 rounded-3xl p-12 border border-neutral-700 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-slate-500/20 rounded-full blur-3xl pointer-events-none"></div>
                 
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 relative z-10">¿Sos un trabajador?</h2>
                 <p className="text-neutral-400 mb-8 relative z-10">Unite a Laburito, armá tu perfil en minutos y empezá a conseguir más clientes en tu ciudad.</p>
                 
-                <button onClick={() => navigate('/register')} className="relative z-10 bg-white text-black font-bold px-8 py-4 rounded-full hover:bg-neutral-200 transition-all cursor-pointer shadow-lg active:scale-95">
+                <button onClick={() => navigate('/register')} className="relative z-10 bg-white text-black font-bold px-8 py-4 rounded-full hover:bg-neutral-200 transition-all cursor-pointer active:scale-95">
                   Crear mi perfil gratis
                 </button>
               </div>

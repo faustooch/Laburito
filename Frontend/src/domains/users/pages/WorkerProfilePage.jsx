@@ -79,7 +79,7 @@ function WorkerProfilePage() {
         
         {/* CABECERA */}
         <section 
-          className={`bg-gradient-to-b md:bg-gradient-to-r from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 lg:p-12 mb-10 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center md:items-start gap-10 transform transition-all duration-700 ease-out ${
+          className={`bg-gradient-to-b md:bg-gradient-to-r from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 lg:p-12 mb-10 relative overflow-hidden flex flex-col md:flex-row items-center md:items-start gap-10 transform transition-all duration-700 ease-out ${
             isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
@@ -107,10 +107,10 @@ function WorkerProfilePage() {
             <h1 className="text-4xl md:text-5xl font-black text-neutral-50 mb-4 tracking-tight">{worker.nickname}</h1>
             
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-8">
-              <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border bg-slate-500/10 text-slate-500 border-slate-500/20 shadow-[0_0_15px_rgba(100,116,139,0.1)]">
+              <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border bg-slate-500/10 text-slate-500 border-slate-500/20">
                 {worker.worker_profile?.profession || 'Profesional'}
               </span>
-              <div className="flex items-center gap-1.5 text-sm font-bold text-neutral-200 bg-neutral-900/80 px-3 py-1.5 rounded-full border border-neutral-800 shadow-inner">
+              <div className="flex items-center gap-1.5 text-sm font-bold text-neutral-200 bg-neutral-900/80 px-3 py-1.5 rounded-full border border-neutral-800">
                 <svg className="w-4 h-4 text-slate-500 fill-current" viewBox="0 0 24 24">
                   <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
                 </svg>
@@ -120,7 +120,7 @@ function WorkerProfilePage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
-              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900 shadow-sm">
+              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900">
                 <div className="flex items-center gap-2 text-neutral-500 mb-1.5">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                   <span className="text-[10px] font-bold uppercase tracking-wider">Ubicación</span>
@@ -128,7 +128,7 @@ function WorkerProfilePage() {
                 <p className="text-sm font-medium text-neutral-200">{worker.city || 'No disponible'}</p>
               </div>
 
-              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900 shadow-sm">
+              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900">
                 <div className="flex items-center gap-2 text-neutral-500 mb-1.5">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                   <span className="text-[10px] font-bold uppercase tracking-wider">Email</span>
@@ -138,7 +138,7 @@ function WorkerProfilePage() {
                 </a>
               </div>
 
-              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900 shadow-sm group cursor-pointer" onClick={() => copyToClipboard(contactPhone)}>
+              <div className="bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-4 flex flex-col items-center md:items-start transition hover:bg-neutral-900 group cursor-pointer" onClick={() => copyToClipboard(contactPhone)}>
                 <div className="flex items-center gap-2 text-neutral-500 mb-1.5">
                   <svg className="w-4 h-4 group-hover:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                   <span className="text-[10px] font-bold uppercase tracking-wider group-hover:text-emerald-500 transition-colors">Teléfono</span>
@@ -167,7 +167,7 @@ function WorkerProfilePage() {
             isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
             
-            <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
+            <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 transition-all hover:border-neutral-700/50">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-slate-500/10 flex items-center justify-center text-slate-500">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -181,7 +181,7 @@ function WorkerProfilePage() {
               </div>
             </section>
 
-            <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-sm shadow-sm transition-all hover:border-neutral-700/50">
+            <section className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 transition-all hover:border-neutral-700/50">
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-neutral-800/50">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-slate-500/10 flex items-center justify-center text-slate-500">
@@ -194,7 +194,7 @@ function WorkerProfilePage() {
                   {user && Number(user.id) !== Number(worker.id) && !showReviewForm && (
                     <button 
                       onClick={() => setShowReviewForm(true)}
-                      className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded-xl text-xs font-bold text-neutral-200 transition-all cursor-pointer shadow-sm active:scale-95"
+                      className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded-xl text-xs font-bold text-neutral-200 transition-all cursor-pointer active:scale-95"
                     >
                       <svg className="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
                       Escribir reseña
@@ -224,7 +224,7 @@ function WorkerProfilePage() {
 
           {/* Corrección 4: El aside no tiene transform, solo el div interior (la tarjeta) lo tiene. Así no se rompe el sticky */}
           <aside className="lg:col-span-4 lg:sticky lg:top-28 z-10">
-            <div className={`bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden group transform transition-all duration-1000 delay-300 ease-out ${
+            <div className={`bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-8 relative overflow-hidden group transform transition-all duration-1000 delay-300 ease-out ${
               isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             }`}>
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-slate-500/10 blur-3xl rounded-full pointer-events-none group-hover:bg-slate-500/20 transition-colors duration-500"></div>

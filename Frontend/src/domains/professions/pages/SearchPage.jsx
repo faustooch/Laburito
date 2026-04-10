@@ -128,7 +128,7 @@ function SearchPage() {
                 <select 
                   value={profession || "Todos los rubros"}
                   onChange={(e) => updateFilter('profession', e.target.value)}
-                  className="w-full bg-neutral-900/50 border border-neutral-800 text-neutral-300 text-xs font-bold rounded-2xl pl-9 pr-8 py-3.5 focus:outline-none focus:border-slate-500/50 hover:bg-neutral-900 transition-all cursor-pointer appearance-none shadow-sm min-w-[160px]"
+                  className="w-full bg-neutral-900/50 border border-neutral-800 text-neutral-300 text-xs font-bold rounded-2xl pl-9 pr-8 py-3.5 focus:outline-none focus:border-slate-500/50 hover:bg-neutral-900 transition-all cursor-pointer appearance-none min-w-[160px]"
                 >
                   <option>Todos los rubros</option>
                   {professions.map(p => (
@@ -147,7 +147,7 @@ function SearchPage() {
                 <select 
                   value={city || "Todas las ciudades"}
                   onChange={(e) => updateFilter('city', e.target.value)}
-                  className="w-full bg-neutral-900/50 border border-neutral-800 text-neutral-300 text-xs font-bold rounded-2xl pl-9 pr-8 py-3.5 focus:outline-none focus:border-slate-500/50 hover:bg-neutral-900 transition-all cursor-pointer appearance-none shadow-sm min-w-[160px]"
+                  className="w-full bg-neutral-900/50 border border-neutral-800 text-neutral-300 text-xs font-bold rounded-2xl pl-9 pr-8 py-3.5 focus:outline-none focus:border-slate-500/50 hover:bg-neutral-900 transition-all cursor-pointer appearance-none min-w-[160px]"
                 >
                   {ARGENTINE_CITIES.map(c => (
                     <option key={c} value={c}>{c}</option>
@@ -165,7 +165,7 @@ function SearchPage() {
                 <select 
                   value={minRating}
                   onChange={(e) => updateFilter('minRating', e.target.value)}
-                  className="w-full bg-neutral-900/50 border border-neutral-800 text-neutral-300 text-xs font-bold rounded-2xl pl-9 pr-8 py-3.5 focus:outline-none focus:border-slate-500/50 hover:bg-neutral-900 transition-all cursor-pointer appearance-none shadow-sm min-w-[160px]"
+                  className="w-full bg-neutral-900/50 border border-neutral-800 text-neutral-300 text-xs font-bold rounded-2xl pl-9 pr-8 py-3.5 focus:outline-none focus:border-slate-500/50 hover:bg-neutral-900 transition-all cursor-pointer appearance-none min-w-[160px]"
                 >
                   {RATINGS.map(r => (
                     <option key={r.value} value={r.value}>{r.label}</option>
@@ -201,7 +201,7 @@ function SearchPage() {
               </div>
             ) : (
               <div className="flex-grow flex flex-col items-center justify-center text-center px-4 bg-neutral-900/20 border border-dashed border-neutral-800/80 rounded-3xl mt-2 min-h-[400px]">
-                <div className="w-20 h-20 bg-neutral-900 border border-neutral-800 rounded-full flex items-center justify-center text-neutral-600 mb-6 shadow-inner">
+                <div className="w-20 h-20 bg-neutral-900 border border-neutral-800 rounded-full flex items-center justify-center text-neutral-600 mb-6">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
                 <h3 className="text-2xl font-bold text-neutral-200 mb-2 tracking-tight">No encontramos trabajadores</h3>

@@ -87,7 +87,7 @@ function LoginPage() {
 
       <main className="flex-grow flex items-center justify-center px-4 py-8 w-full">
         <div 
-          className={`w-full max-w-sm bg-neutral-900/50 p-6 rounded-2xl border border-neutral-800 shadow-xl backdrop-blur-sm transform transition-all duration-700 ease-out ${
+          className={`w-full max-w-sm bg-neutral-900/50 p-6 rounded-2xl border border-neutral-800 transform transition-all duration-700 ease-out ${
             isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
@@ -145,7 +145,7 @@ function LoginPage() {
                   ? 'bg-green-600 text-white' 
                   : !isFormValid 
                     ? 'bg-neutral-800 text-neutral-500 cursor-not-allowed opacity-50' 
-                    : 'bg-slate-600 text-white hover:bg-slate-500 cursor-pointer shadow-sm active:scale-95'
+                    : 'bg-slate-600 text-white hover:bg-slate-500 cursor-pointer active:scale-95'
                 }`}
             >
               {isLoading ? (

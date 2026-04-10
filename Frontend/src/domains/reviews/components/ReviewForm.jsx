@@ -36,7 +36,7 @@ function ReviewForm({ workerId, onReviewSuccess, onCancel }) {
 
   return (
     // CORRECCIÓN: Le damos el estilo de tarjeta directamente al form
-    <form onSubmit={handleSubmit} className="bg-neutral-900/40 backdrop-blur-sm border border-neutral-800 rounded-3xl p-6 sm:p-8 shadow-inner relative overflow-hidden transition-all hover:border-neutral-700/50">
+    <form onSubmit={handleSubmit} className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden transition-all hover:border-neutral-700/50">
       
       {/* Luz de acento sutil */}
       <div className="absolute -top-10 -right-10 w-32 h-32 bg-slate-500/5 blur-3xl rounded-full pointer-events-none"></div>
@@ -57,7 +57,7 @@ function ReviewForm({ workerId, onReviewSuccess, onCancel }) {
                 <svg 
                   className={`w-6 h-6 transition-colors ${
                     star <= rating 
-                      ? 'text-yellow-400 fill-current drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]' 
+                      ? 'text-yellow-400 fill-current drop-' 
                       : 'text-transparent stroke-yellow-400/50 hover:stroke-yellow-400'
                   }`} 
                   viewBox="0 0 24 24"
@@ -105,7 +105,7 @@ function ReviewForm({ workerId, onReviewSuccess, onCancel }) {
             <button
               type="submit"
               disabled={isSaving || showCheck}
-              className={`min-w-[150px] w-full sm:w-auto text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-all shadow-sm cursor-pointer flex items-center justify-center gap-2 active:scale-95
+              className={`min-w-[150px] w-full sm:w-auto text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 active:scale-95
                 ${showCheck ? 'bg-green-600' : 'bg-slate-600 hover:bg-slate-500'} 
                 disabled:opacity-70 disabled:active:scale-100`}
             >
