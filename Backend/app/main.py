@@ -23,6 +23,7 @@ app = FastAPI(title="API de Usuarios", version="1.0.0")
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://laburito-eta.vercel.app/"
 ]
 
 # 3. Agregamos el middleware al motor de FastAPI
