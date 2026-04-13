@@ -15,7 +15,7 @@ function Footer() {
           {/* Marca y Propósito */}
           <div className="max-w-sm">
             <h2 className="text-xl font-black text-neutral-50 mb-3 tracking-tighter">
-              LABURITO<span className="text-slate-500">.</span>
+              Laburito<span className="text-slate-500">.</span>
             </h2>
             <p className="text-sm text-neutral-500 leading-relaxed">
               Plataforma para conectar con trabajadores en Argentina.
@@ -41,15 +41,11 @@ function Footer() {
             <p className="text-[11px] text-neutral-600 font-medium uppercase tracking-widest">
               &copy; {year} Laburito. Todos los derechos reservados.
             </p>
-            <span className="hidden md:inline text-neutral-800">•</span>
-            <p className="text-[11px] text-neutral-500 font-medium uppercase tracking-widest">
-              Hecho con <span className="text-slate-500">♥</span> en Córdoba
-            </p>
           </div>
           
           {/* Créditos y GitHub */}
           <div className="flex items-center gap-3">
-            <span className="text-xs text-neutral-500">Desarrollado por <strong className="text-neutral-300">Fausto Chiacchietta</strong></span>
+            <span className="text-xs text-neutral-500">Desarrollado por <a href='https://portfolio-fch.netlify.app/'><strong className="text-neutral-300">Fausto Chiacchietta </strong></a></span>
             <a 
               href="https://github.com/faustooch" 
               target="_blank" 
