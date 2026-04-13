@@ -252,7 +252,6 @@ function HomePage() {
       <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">
         Explorá nuestros <span className="text-slate-500">Oficios</span>
       </h2>
-      <p className="text-neutral-500 text-sm font-medium">Click y arrastre para explorar las categorías</p>
     </div>
     
     <div className="w-full relative select-none group flex flex-col gap-4">
