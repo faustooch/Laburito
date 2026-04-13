@@ -6,7 +6,7 @@ import { AuthProvider } from './domains/auth/context/AuthContext.jsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
-const GOOGLE_CLIENT_ID = import.meta.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
