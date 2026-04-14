@@ -45,7 +45,7 @@ function Footer() {
           
           {/* Créditos y GitHub */}
           <div className="flex items-center gap-3">
-            <span className="text-xs text-neutral-500">Desarrollado por <a href='https://portfolio-fch.netlify.app/'><strong className="text-neutral-300">Fausto Chiacchietta </strong></a></span>
+            <span className="text-xs text-neutral-500">Desarrollado por <a href='https://mi-portfolio-v2.vercel.app/' target="_blank"><strong className="text-neutral-300">Fausto Chiacchietta </strong></a></span>
             <a 
               href="https://github.com/faustooch" 
               target="_blank" 
